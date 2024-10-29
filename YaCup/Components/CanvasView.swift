@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct CanvasView: View {
-    @State private var rotation: Double = 0
+    @State private var rotation = 0.0
     @State private var isAnimating = false
-    let flipEnabled: Bool
-    let threshold: CGFloat = UIScreen.main.bounds.width / 16
-
     
-    init(flipEnabled: Bool = false) {
-        self.flipEnabled = flipEnabled
+    @Binding var isEditing: Bool
+    
+    private let threshold: CGFloat = UIScreen.main.bounds.width / 16
+    private var flipEnabled: Bool {
+        isEditing
     }
     
     var body: some View {
@@ -56,5 +56,5 @@ struct CanvasView: View {
 }
 
 #Preview {
-    CanvasView(flipEnabled: true)
+    CanvasView(isEditing: .constant(false))
 }

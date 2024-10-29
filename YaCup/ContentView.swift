@@ -10,8 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color.black
-            CanvasView(flipEnabled: true)
+            EditorView()
         }.ignoresSafeArea()
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditorView: View {
     
-    enum Tool {
+    private enum Tool {
         case draw
         case erase
     }
@@ -21,7 +21,7 @@ struct EditorView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CanvasView(flipEnabled: true)
+                CanvasView(isEditing: .constant(currentTool != .draw && currentTool != .erase))
                 Spacer()
                 HStack {
                     Spacer()
