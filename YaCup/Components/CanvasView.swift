@@ -20,13 +20,14 @@ struct CanvasView: View {
     @State private var paths: [DrawingPath] = []
     @State private var rotation = 0.0
     @State private var isAnimating = false
+    @State private var isDragging = false
     
     @Binding var editorState: EditorState
     @Binding var drawColor: Color
     
     private let threshold: CGFloat = UIScreen.main.bounds.width / 16
     private var flipEnabled: Bool {
-        editorState != .drawing && editorState != .erasing
+        editorState == .none
     }
     private let lineWidth: CGFloat = 3
     private let eraserLineWidth: CGFloat = 20
@@ -82,41 +83,10 @@ struct CanvasView: View {
                         }
                     }
                 }
+                .contentShape(Rectangle())
+                .allowsHitTesting(editorState != .none)
                 .gesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                        .onChanged { value in
-                            let newPoint = value.location
-                            
-                            if editorState == .drawing {
-                                if currentPath == nil {
-                                    currentPath = DrawingPath(
-                                        points: [newPoint],
-                                        color: drawColor,
-                                        lineWidth: lineWidth,
-                                        isEraser: false
-                                    )
-                                } else {
-                                    currentPath?.points.append(newPoint)
-                                }
-                            } else if editorState == .erasing {
-                                if currentPath == nil {
-                                    currentPath = DrawingPath(
-                                        points: [newPoint],
-                                        color: .clear,
-                                        lineWidth: eraserLineWidth,
-                                        isEraser: true
-                                    )
-                                } else {
-                                    currentPath?.points.append(newPoint)
-                                }
-                            }
-                        }
-                        .onEnded { _ in
-                            if let path = currentPath {
-                                paths.append(path)
-                            }
-                            currentPath = nil
-                        }
+                    editorState != .none ? drawingGesture : nil
                 )
             }
             .rotation3DEffect(
@@ -124,34 +94,78 @@ struct CanvasView: View {
                 axis: (x: 0, y: 1, z: 0)
             )
             .gesture(
-                flipEnabled ?
-                DragGesture()
-                    .onChanged { gesture in
-                        if !isAnimating {
-                            if abs(gesture.translation.width) > threshold {
-                                isAnimating = true
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    rotation = gesture.translation.width > 0 ? 180 : -180
-                                }
-                                isAnimating = false
-                            } else {
-                                rotation = Double(gesture.translation.width / UIScreen.main.bounds.width * 360)
-                                rotation = min(max(rotation, -180), 180)
-                            }
-                        }
-                    }
-                    .onEnded { gesture in
-                        if abs(gesture.translation.width) <= threshold {
-                            withAnimation(.spring()) {
-                                rotation = 0
-                            }
-                        }
-                    } : nil
+                flipGesture
             )
         }
+    }
+    
+    
+    private var drawingGesture: some Gesture {
+        DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .onChanged { value in
+                let newPoint = value.location
+                
+                if editorState == .drawing {
+                    if currentPath == nil {
+                        currentPath = DrawingPath(
+                            points: [newPoint],
+                            color: drawColor,
+                            lineWidth: lineWidth,
+                            isEraser: false
+                        )
+                    } else {
+                        currentPath?.points.append(newPoint)
+                    }
+                } else if editorState == .erasing {
+                    if currentPath == nil {
+                        currentPath = DrawingPath(
+                            points: [newPoint],
+                            color: .clear,
+                            lineWidth: eraserLineWidth,
+                            isEraser: true
+                        )
+                    } else {
+                        currentPath?.points.append(newPoint)
+                    }
+                }
+            }
+            .onEnded { _ in
+                if let path = currentPath {
+                    paths.append(path)
+                }
+                currentPath = nil
+            }
+    }
+    
+    
+    private var flipGesture: some Gesture {
+        DragGesture()
+            .onChanged { gesture in
+                if flipEnabled && !isAnimating {
+                    if abs(gesture.translation.width) > threshold {
+                        isAnimating = true
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            rotation = gesture.translation.width > 0 ? 180 : -180
+                        }
+                        isAnimating = false
+                    } else {
+                        rotation = Double(gesture.translation.width / UIScreen.main.bounds.width * 360)
+                        rotation = min(max(rotation, -180), 180)
+                    }
+                }
+            }
+            .onEnded { gesture in
+                if flipEnabled {
+                    if abs(gesture.translation.width) <= threshold {
+                        withAnimation(.spring()) {
+                            rotation = 0
+                        }
+                    }
+                }
+            }
     }
 }
 
 #Preview {
-    CanvasView(editorState: .constant(.erasing), drawColor: .constant(.red))
+    CanvasView(editorState: .constant(.none), drawColor: .constant(.red))
 }

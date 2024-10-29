@@ -9,7 +9,6 @@ import SwiftUI
 
 struct EditorView: View {
     
-    
     @State private var editorState: EditorState = .none
     @State private var undoAvailable: Bool = false
     @State private var revertAvailable: Bool = false
@@ -48,7 +47,7 @@ struct EditorView: View {
                         ColorPicker("Colors", selection: $drawColor).frame(width: 32, height: 32)
                     }
                     Spacer()
-                }
+                }.frame(height: 32)
             }
             .toolbar {
                 Image(systemName: "arrow.uturn.backward.circle")
