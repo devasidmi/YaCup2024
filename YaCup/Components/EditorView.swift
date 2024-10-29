@@ -9,11 +9,8 @@ import SwiftUI
 
 struct EditorView: View {
     
-    private enum Tool {
-        case draw
-        case erase
-    }
-    @State private var currentTool: Tool? = .draw
+    
+    @State private var editorState: EditorState = .none
     @State private var undoAvailable: Bool = false
     @State private var revertAvailable: Bool = false
     @State private var drawColor = Color(.blue)
@@ -21,23 +18,23 @@ struct EditorView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CanvasView(isEditing: .constant(currentTool != .draw && currentTool != .erase))
+                CanvasView(editorState: $editorState)
                 Spacer()
                 HStack {
                     Spacer()
                     Image(systemName: "pencil.tip").imageScale(.large)
-                        .foregroundColor(currentTool == .draw ? .yellow : .gray)
+                        .foregroundColor(editorState == .drawing ? .yellow : .gray)
                         .onTapGesture {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                currentTool = (currentTool == .draw) ? nil : .draw
+                                editorState = editorState == .drawing ? .none : .drawing
                             }
                         }
                     Spacer()
                     Image(systemName: "eraser").imageScale(.large)
-                        .foregroundColor(currentTool == .erase ? .yellow : .gray)
+                        .foregroundColor(editorState == .erasing ? .yellow : .gray)
                         .onTapGesture {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                currentTool = (currentTool == .erase) ? nil : .erase
+                                editorState = (editorState == .erasing) ? .none : .erasing
                             }
                         }
                     Spacer()
@@ -46,7 +43,7 @@ struct EditorView: View {
                         .onTapGesture {
                             print("Create new canvas!")
                         }
-                    if currentTool == .draw {
+                    if editorState == .drawing {
                         Spacer()
                         ColorPicker("Colors", selection: $drawColor).frame(width: 32, height: 32)
                     }

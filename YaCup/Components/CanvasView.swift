@@ -11,11 +11,11 @@ struct CanvasView: View {
     @State private var rotation = 0.0
     @State private var isAnimating = false
     
-    @Binding var isEditing: Bool
+    @Binding var editorState: EditorState
     
     private let threshold: CGFloat = UIScreen.main.bounds.width / 16
     private var flipEnabled: Bool {
-        isEditing
+        editorState != .drawing && editorState != .erasing
     }
     
     var body: some View {
@@ -56,5 +56,5 @@ struct CanvasView: View {
 }
 
 #Preview {
-    CanvasView(isEditing: .constant(false))
+    CanvasView(editorState: .constant(EditorState.none))
 }
