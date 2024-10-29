@@ -18,7 +18,7 @@ struct EditorView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CanvasView(editorState: $editorState)
+                CanvasView(editorState: $editorState, drawColor: $drawColor)
                 Spacer()
                 HStack {
                     Spacer()
