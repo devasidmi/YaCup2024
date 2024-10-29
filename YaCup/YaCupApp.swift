@@ -2,7 +2,7 @@
 //  YaCupApp.swift
 //  YaCup
 //
-//  Created by Vasiliy Dmitriev on 24.10.2024.
+//  Created by Vasiliy Dmitriev on 29.10.2024.
 //
 
 import SwiftUI
