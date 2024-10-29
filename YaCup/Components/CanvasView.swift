@@ -11,6 +11,8 @@ struct CanvasView: View {
     @State private var rotation: Double = 0
     @State private var isAnimating = false
     let flipEnabled: Bool
+    let threshold: CGFloat = UIScreen.main.bounds.width / 16
+
     
     init(flipEnabled: Bool = false) {
         self.flipEnabled = flipEnabled
@@ -30,20 +32,20 @@ struct CanvasView: View {
                 DragGesture()
                     .onChanged { gesture in
                         if !isAnimating {
-                            rotation = Double(gesture.translation.width / UIScreen.main.bounds.width * 360)
-                            rotation = min(max(rotation, -180), 180)
+                            if abs(gesture.translation.width) > threshold {
+                                isAnimating = true
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    rotation = gesture.translation.width > 0 ? 180 : -180
+                                }
+                                isAnimating = false
+                            } else {
+                                rotation = Double(gesture.translation.width / UIScreen.main.bounds.width * 360)
+                                rotation = min(max(rotation, -180), 180)
+                            }
                         }
                     }
                     .onEnded { gesture in
-                        let threshold: CGFloat = UIScreen.main.bounds.width / 8
-                        
-                        if abs(gesture.translation.width) > threshold {
-                            isAnimating = true
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                rotation = gesture.translation.width > 0 ? 180 : -180
-                            }
-                            isAnimating = false
-                        } else {
+                        if abs(gesture.translation.width) <= threshold {
                             withAnimation(.spring()) {
                                 rotation = 0
                             }
@@ -54,5 +56,5 @@ struct CanvasView: View {
 }
 
 #Preview {
-    CanvasView()
+    CanvasView(flipEnabled: true)
 }
