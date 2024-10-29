@@ -29,6 +29,7 @@ struct CanvasView: View {
         editorState != .drawing && editorState != .erasing
     }
     private let lineWidth: CGFloat = 3
+    private let eraserLineWidth: CGFloat = 20
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,7 +51,7 @@ struct CanvasView: View {
                                 with: .color(.black),
                                 lineWidth: path.lineWidth
                             )
-                            context.blendMode = .normal // Reset blend mode
+                            context.blendMode = .normal
                         } else {
                             context.stroke(
                                 stroke,
@@ -71,7 +72,7 @@ struct CanvasView: View {
                                 with: .color(.black),
                                 lineWidth: currentPath.lineWidth
                             )
-                            context.blendMode = .normal // Reset blend mode
+                            context.blendMode = .normal
                         } else {
                             context.stroke(
                                 stroke,
@@ -88,13 +89,23 @@ struct CanvasView: View {
                             
                             if editorState == .drawing {
                                 if currentPath == nil {
-                                    currentPath = DrawingPath(points: [newPoint], color: drawColor, lineWidth: lineWidth, isEraser: false)
+                                    currentPath = DrawingPath(
+                                        points: [newPoint],
+                                        color: drawColor,
+                                        lineWidth: lineWidth,
+                                        isEraser: false
+                                    )
                                 } else {
                                     currentPath?.points.append(newPoint)
                                 }
                             } else if editorState == .erasing {
                                 if currentPath == nil {
-                                    currentPath = DrawingPath(points: [newPoint], color: .clear, lineWidth: lineWidth, isEraser: true)
+                                    currentPath = DrawingPath(
+                                        points: [newPoint],
+                                        color: .clear,
+                                        lineWidth: eraserLineWidth,
+                                        isEraser: true
+                                    )
                                 } else {
                                     currentPath?.points.append(newPoint)
                                 }
@@ -142,5 +153,5 @@ struct CanvasView: View {
 }
 
 #Preview {
-    CanvasView(editorState: .constant(EditorState.drawing), drawColor: .constant(.red))
+    CanvasView(editorState: .constant(.erasing), drawColor: .constant(.red))
 }
