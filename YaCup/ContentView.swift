@@ -11,14 +11,10 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color.black
-            Image("Card")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(16)
+            CanvasView(flipEnabled: true)
         }.ignoresSafeArea()
     }
 }
-
 
 #Preview {
     ContentView()
