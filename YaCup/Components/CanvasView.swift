@@ -72,6 +72,7 @@ struct CanvasView: View {
                 .contentShape(Rectangle())
                 .allowsHitTesting(editorState != .none)
                 .gesture(editorState != .none ? drawingGesture : nil)
+                .mask(Image("Card").resizable().aspectRatio(contentMode: .fit).padding(16))
                 
                 if editorState == .erasing, let position = eraserPosition {
                     ZStack {
@@ -167,5 +168,5 @@ struct CanvasView: View {
 }
 
 #Preview {
-    CanvasView(editorState: .constant(.none), drawColor: .constant(.red))
+    CanvasView(editorState: .constant(.drawing), drawColor: .constant(.red))
 }
