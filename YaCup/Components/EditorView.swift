@@ -16,6 +16,7 @@ struct EditorView: View {
     @State private var currentTool: Tool? = .draw
     @State private var undoAvailable: Bool = false
     @State private var revertAvailable: Bool = false
+    @State private var drawColor = Color(.blue)
     
     var body: some View {
         NavigationStack {
@@ -47,9 +48,7 @@ struct EditorView: View {
                         }
                     if currentTool == .draw {
                         Spacer()
-                        Circle()
-                            .frame(width: 32, height: 32)
-                            .foregroundColor(.blue)
+                        ColorPicker("Colors", selection: $drawColor).frame(width: 32, height: 32)
                     }
                     Spacer()
                 }
