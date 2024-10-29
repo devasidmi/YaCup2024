@@ -14,6 +14,11 @@ struct EditorView: View {
     @State private var revertAvailable: Bool = false
     @State private var drawColor = Color(.blue)
     
+    private func triggerHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -24,6 +29,7 @@ struct EditorView: View {
                     Image(systemName: "pencil.tip").imageScale(.large)
                         .foregroundColor(editorState == .drawing ? .yellow : .gray)
                         .onTapGesture {
+                            triggerHapticFeedback()
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                 editorState = editorState == .drawing ? .none : .drawing
                             }
@@ -32,6 +38,7 @@ struct EditorView: View {
                     Image(systemName: "eraser").imageScale(.large)
                         .foregroundColor(editorState == .erasing ? .yellow : .gray)
                         .onTapGesture {
+                            triggerHapticFeedback()
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                 editorState = (editorState == .erasing) ? .none : .erasing
                             }
@@ -40,6 +47,7 @@ struct EditorView: View {
                     Image(systemName: "square.and.pencil").imageScale(.large)
                         .foregroundColor(.yellow)
                         .onTapGesture {
+                            triggerHapticFeedback()
                             print("Create new canvas!")
                         }
                     if editorState == .drawing {

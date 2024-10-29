@@ -22,12 +22,13 @@ struct CanvasView: View {
     @State private var isAnimating = false
     @State private var initialRotation: Double = 0.0
     @State private var isDragging = false
+    @State private var eraserPosition: CGPoint?
     
     @Binding var editorState: EditorState
     @Binding var drawColor: Color
     
     private let lineWidth: CGFloat = 3
-    private let eraserLineWidth: CGFloat = 20
+    private let eraserLineWidth: CGFloat = 48
     private let thresholdPercentage: CGFloat = 0.25
     private let flipAngle: Double = 180.0
     
@@ -71,6 +72,18 @@ struct CanvasView: View {
                 .contentShape(Rectangle())
                 .allowsHitTesting(editorState != .none)
                 .gesture(editorState != .none ? drawingGesture : nil)
+                
+                if editorState == .erasing, let position = eraserPosition {
+                    ZStack {
+                        Circle()
+                            .fill(Color.white) // Add solid white background
+                            .frame(width: eraserLineWidth, height: eraserLineWidth)
+                        Circle()
+                            .stroke(Color.gray, lineWidth: 2)
+                            .frame(width: eraserLineWidth, height: eraserLineWidth)
+                    }
+                    .position(position)
+                }
             }
             .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
             .gesture(flipGesture)
@@ -88,6 +101,7 @@ struct CanvasView: View {
                         currentPath?.points.append(newPoint)
                     }
                 } else if editorState == .erasing {
+                    eraserPosition = newPoint
                     if currentPath == nil {
                         currentPath = DrawingPath(points: [newPoint], color: .clear, lineWidth: eraserLineWidth, isEraser: true)
                     } else {
@@ -100,6 +114,7 @@ struct CanvasView: View {
                     paths.append(path)
                 }
                 currentPath = nil
+                eraserPosition = nil
             }
     }
     
@@ -141,7 +156,6 @@ struct CanvasView: View {
                             isAnimating = false
                         }
                     } else {
-                        
                         withAnimation(.spring()) {
                             rotation = initialRotation
                         }
@@ -151,7 +165,6 @@ struct CanvasView: View {
             }
     }
 }
-
 
 #Preview {
     CanvasView(editorState: .constant(.none), drawColor: .constant(.red))
