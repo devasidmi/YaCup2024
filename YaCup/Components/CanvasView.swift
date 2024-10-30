@@ -18,7 +18,9 @@ struct DrawingPath: Identifiable {
 struct CanvasView: View {
     @State private var currentPath: DrawingPath?
     @State private var frontPaths: [DrawingPath] = []
+    @State private var frontEraserPaths: [DrawingPath] = []
     @State private var backPaths: [DrawingPath] = []
+    @State private var backEraserPaths: [DrawingPath] = []
     
     @State private var rotation: Double = 0.0
     @State private var isAnimating = false
@@ -39,8 +41,8 @@ struct CanvasView: View {
     }
     
     private var isFrontSide: Bool {
-        let normalizedRotation = rotation.truncatingRemainder(dividingBy: 360)
-        return abs(normalizedRotation) < 90 || abs(normalizedRotation) > 270
+        let normalizedRotation = (rotation.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
+        return (normalizedRotation >= 0 && normalizedRotation <= 90) || (normalizedRotation >= 270 && normalizedRotation <= 360)
     }
     
     var body: some View {
@@ -52,44 +54,34 @@ struct CanvasView: View {
                     .padding(16)
                 
                 Canvas { context, size in
-                    let currentPaths = isFrontSide ? frontPaths : backPaths
-                    for path in currentPaths {
-                        var stroke = Path()
-                        stroke.addLines(path.points)
-                        if path.isEraser {
-                            context.blendMode = .destinationOut
-                            context.stroke(stroke, with: .color(.black), lineWidth: path.lineWidth)
-                            context.blendMode = .normal
-                        } else {
-                            context.stroke(stroke, with: .color(path.color), lineWidth: path.lineWidth)
+                    let currentDrawingPaths = isFrontSide ? frontPaths : backPaths
+                    let currentEraserPaths = isFrontSide ? frontEraserPaths : backEraserPaths
+                    
+                    
+                    context.drawLayer { layerContext in
+                        drawPaths(context: &layerContext, paths: currentDrawingPaths, size: size)
+                        drawPaths(context: &layerContext, paths: currentEraserPaths, size: size, isEraser: true)
+                        
+                        
+                        if let currentPath = currentPath {
+                            drawPath(context: &layerContext, path: currentPath, size: size)
                         }
                     }
+                    
                     
                     if !isFrontSide {
                         context.opacity = 0.5
-                        for path in frontPaths {
-                            var stroke = Path()
-                            stroke.addLines(path.points)
-                            context.stroke(stroke, with: .color(path.color), lineWidth: path.lineWidth)
-                        }
-                        context.opacity = 1.0
-                    }
-                    
-                    if let currentPath = currentPath {
-                        var stroke = Path()
-                        stroke.addLines(currentPath.points)
-                        if currentPath.isEraser {
-                            context.blendMode = .destinationOut
-                            context.stroke(stroke, with: .color(.black), lineWidth: currentPath.lineWidth)
-                            context.blendMode = .normal
-                        } else {
-                            context.stroke(stroke, with: .color(currentPath.color), lineWidth: currentPath.lineWidth)
+                        context.drawLayer { layerContext in
+                            
+                            drawPaths(context: &layerContext, paths: frontPaths, size: size, flipHorizontally: true)
+                            
+                            drawPaths(context: &layerContext, paths: frontEraserPaths, size: size, isEraser: true, flipHorizontally: true)
                         }
                     }
                 }
                 .contentShape(Rectangle())
                 .allowsHitTesting(editorState != .none)
-                .gesture(editorState != .none ? drawingGesture : nil)
+                .gesture(editorState != .none ? drawingGesture(in: geometry) : nil)
                 .mask(Image("Card").resizable().aspectRatio(contentMode: .fit).padding(16))
                 
                 if editorState == .erasing, let position = eraserPosition {
@@ -101,7 +93,7 @@ struct CanvasView: View {
                             .stroke(Color.gray, lineWidth: 2)
                             .frame(width: eraserLineWidth, height: eraserLineWidth)
                     }
-                    .position(position)
+                    .position(adjustedPosition(for: position, in: geometry.size))
                 }
             }
             .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
@@ -109,17 +101,55 @@ struct CanvasView: View {
         }
     }
     
-    private var drawingGesture: some Gesture {
+    private func drawPaths(context: inout GraphicsContext, paths: [DrawingPath], size: CGSize, isEraser: Bool = false, flipHorizontally: Bool = false) {
+        for path in paths {
+            drawPath(context: &context, path: path, size: size, isEraser: isEraser, flipHorizontally: flipHorizontally)
+        }
+    }
+    
+    private func drawPath(context: inout GraphicsContext, path: DrawingPath, size: CGSize, isEraser: Bool = false, flipHorizontally: Bool = false) {
+        var adjustedPoints = path.points
+        
+        if (!isFrontSide && !isEraser) || flipHorizontally {
+            adjustedPoints = adjustedPoints.map { CGPoint(x: size.width - $0.x, y: $0.y) }
+        }
+        
+        var stroke = Path()
+        stroke.addLines(adjustedPoints)
+        
+        if path.isEraser || isEraser {
+            context.blendMode = .destinationOut
+            context.stroke(stroke, with: .color(.black), lineWidth: path.lineWidth)
+            context.blendMode = .normal
+        } else {
+            context.stroke(stroke, with: .color(path.color), lineWidth: path.lineWidth)
+        }
+    }
+    
+    private func adjustedPosition(for position: CGPoint, in size: CGSize) -> CGPoint {
+        if !isFrontSide {
+            return CGPoint(x: size.width - position.x, y: position.y)
+        } else {
+            return position
+        }
+    }
+    
+    private func drawingGesture(in geometry: GeometryProxy) -> some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
-                let newPoint = value.location
+                let newPoint: CGPoint
+                if !isFrontSide {
+                    newPoint = CGPoint(x: geometry.size.width - value.location.x, y: value.location.y)
+                } else {
+                    newPoint = value.location
+                }
                 if editorState == .drawing {
                     if currentPath == nil {
                         currentPath = DrawingPath(points: [newPoint], color: drawColor, lineWidth: lineWidth, isEraser: false)
                     } else {
                         currentPath?.points.append(newPoint)
                     }
-                } else if editorState == .erasing && isFrontSide {
+                } else if editorState == .erasing {
                     eraserPosition = newPoint
                     if currentPath == nil {
                         currentPath = DrawingPath(points: [newPoint], color: .clear, lineWidth: eraserLineWidth, isEraser: true)
@@ -130,10 +160,18 @@ struct CanvasView: View {
             }
             .onEnded { _ in
                 if let path = currentPath {
-                    if isFrontSide {
-                        frontPaths.append(path)
-                    } else {
-                        backPaths.append(path)
+                    if editorState == .drawing {
+                        if isFrontSide {
+                            frontPaths.append(path)
+                        } else {
+                            backPaths.append(path)
+                        }
+                    } else if editorState == .erasing {
+                        if isFrontSide {
+                            frontEraserPaths.append(path)
+                        } else {
+                            backEraserPaths.append(path)
+                        }
                     }
                 }
                 currentPath = nil
