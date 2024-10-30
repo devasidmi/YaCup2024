@@ -17,7 +17,9 @@ struct DrawingPath: Identifiable {
 
 struct CanvasView: View {
     @State private var currentPath: DrawingPath?
-    @State private var paths: [DrawingPath] = []
+    @State private var frontPaths: [DrawingPath] = []
+    @State private var backPaths: [DrawingPath] = []
+    
     @State private var rotation: Double = 0.0
     @State private var isAnimating = false
     @State private var initialRotation: Double = 0.0
@@ -36,6 +38,11 @@ struct CanvasView: View {
         editorState == .none
     }
     
+    private var isFrontSide: Bool {
+        let normalizedRotation = rotation.truncatingRemainder(dividingBy: 360)
+        return abs(normalizedRotation) < 90 || abs(normalizedRotation) > 270
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -45,7 +52,8 @@ struct CanvasView: View {
                     .padding(16)
                 
                 Canvas { context, size in
-                    for path in paths {
+                    let currentPaths = isFrontSide ? frontPaths : backPaths
+                    for path in currentPaths {
                         var stroke = Path()
                         stroke.addLines(path.points)
                         if path.isEraser {
@@ -55,6 +63,16 @@ struct CanvasView: View {
                         } else {
                             context.stroke(stroke, with: .color(path.color), lineWidth: path.lineWidth)
                         }
+                    }
+                    
+                    if !isFrontSide {
+                        context.opacity = 0.5
+                        for path in frontPaths {
+                            var stroke = Path()
+                            stroke.addLines(path.points)
+                            context.stroke(stroke, with: .color(path.color), lineWidth: path.lineWidth)
+                        }
+                        context.opacity = 1.0
                     }
                     
                     if let currentPath = currentPath {
@@ -77,7 +95,7 @@ struct CanvasView: View {
                 if editorState == .erasing, let position = eraserPosition {
                     ZStack {
                         Circle()
-                            .fill(Color.white) // Add solid white background
+                            .fill(Color.white)
                             .frame(width: eraserLineWidth, height: eraserLineWidth)
                         Circle()
                             .stroke(Color.gray, lineWidth: 2)
@@ -101,7 +119,7 @@ struct CanvasView: View {
                     } else {
                         currentPath?.points.append(newPoint)
                     }
-                } else if editorState == .erasing {
+                } else if editorState == .erasing && isFrontSide {
                     eraserPosition = newPoint
                     if currentPath == nil {
                         currentPath = DrawingPath(points: [newPoint], color: .clear, lineWidth: eraserLineWidth, isEraser: true)
@@ -112,7 +130,11 @@ struct CanvasView: View {
             }
             .onEnded { _ in
                 if let path = currentPath {
-                    paths.append(path)
+                    if isFrontSide {
+                        frontPaths.append(path)
+                    } else {
+                        backPaths.append(path)
+                    }
                 }
                 currentPath = nil
                 eraserPosition = nil
