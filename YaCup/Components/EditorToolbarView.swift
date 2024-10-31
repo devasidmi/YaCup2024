@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct EditorToolbarView: View {
-    var showAllMode: Bool
+    let showAllMode: Bool
     @Binding var undoAvailable: Bool
     @Binding var revertAvailable: Bool
     
-    var onAddNewCard: () -> Void
-    var onRemoveCard: () -> Void
-    var onShowAll: () -> Void
+    let onAddNewCard: () -> Void
+    let onRemoveCard: () -> Void
+    let onShowAll: () -> Void
     
     
     var body: some View {

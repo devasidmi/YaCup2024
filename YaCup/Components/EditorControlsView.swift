@@ -11,8 +11,8 @@ struct EditorControlsView: View {
     @Binding var editorState: EditorState
     @Binding var drawColor: Color
     
-    var onEdit: () -> Void
-    var onErase: () -> Void
+    let onEdit: () -> Void
+    let onErase: () -> Void
     
     var body: some View {
         HStack {

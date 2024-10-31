@@ -10,11 +10,7 @@ import SwiftUI
 struct CanvasView: View {
     let mainPaths: [DrawingPath]
     let opacityPaths: [DrawingPath]
-    let opacity: Double
-    
-    let currentPath: DrawingPath?
-    let eraserPosition: CGPoint?
-    let eraserLineWidth: CGFloat
+    var currentPath: DrawingPath? = nil
     
     var body: some View {
         Canvas { context, size in
@@ -48,7 +44,7 @@ struct CanvasView: View {
                 }
             }
             
-            context.opacity = opacity
+            context.opacity = 0.3
             context.drawLayer { layerContext in
                 for path in opacityPaths {
                     var stroke = Path()

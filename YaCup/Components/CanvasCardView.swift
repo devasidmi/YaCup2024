@@ -9,7 +9,7 @@ import SwiftUI
 
 
 private struct AnimatedCanvas: View, Animatable {
-    var geometry: GeometryProxy
+    let geometry: GeometryProxy
     var rotation: Double
     
     @Binding var cardData: CardData
@@ -20,7 +20,7 @@ private struct AnimatedCanvas: View, Animatable {
     @State private var eraserPosition: CGPoint?
     
     private let lineWidth: CGFloat = 3
-    private let eraserLineWidth: CGFloat = 48
+    private let eraserLineWidth = 48.0
     
     private var isFrontSide: Bool {
         let normalizedRotation = (rotation.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
@@ -39,10 +39,7 @@ private struct AnimatedCanvas: View, Animatable {
         CanvasView(
             mainPaths: isFrontSide ? cardData.frontPaths : cardData.backPaths,
             opacityPaths: !isFrontSide ? cardData.frontPaths : [],
-            opacity: !isFrontSide ? 0.3 : 1.0,
-            currentPath: currentPath,
-            eraserPosition: eraserPosition,
-            eraserLineWidth: eraserLineWidth
+            currentPath: currentPath
         )
         .contentShape(Rectangle())
         .allowsHitTesting(editorState != .none)
