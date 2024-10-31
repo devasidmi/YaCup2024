@@ -77,59 +77,29 @@ struct EditorView: View {
             VStack {
                 CanvasView(editorState: $editorState, drawColor: $drawColor, cardData: $cardData)
                 Spacer()
-                HStack {
-                    Spacer()
-                    Image(systemName: "pencil.tip").imageScale(.large)
-                        .foregroundColor(editorState == .drawing ? .yellow : .gray)
-                        .onTapGesture {
-                            triggerHapticFeedback()
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                editorState = editorState == .drawing ? .none : .drawing
-                            }
+                EditorControls(
+                    editorState: $editorState,
+                    drawColor: $drawColor,
+                    onEdit: {
+                        triggerHapticFeedback()
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            editorState = editorState == .drawing ? .none : .drawing
                         }
-                    Spacer()
-                    Image(systemName: "eraser.line.dashed").imageScale(.large)
-                        .foregroundColor(editorState == .erasing ? .yellow : .gray)
-                        .onTapGesture {
-                            triggerHapticFeedback()
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                editorState = (editorState == .erasing) ? .none : .erasing
-                            }
+                    }, onErase: {
+                        triggerHapticFeedback()
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            editorState = (editorState == .erasing) ? .none : .erasing
                         }
-                    if editorState == .drawing {
-                        Spacer()
-                        ColorPicker("Colors", selection: $drawColor).frame(width: 32, height: 32)
                     }
-                    Spacer()
-                }.frame(height: 32)
+                )
             }
             .toolbar {
-                Image(systemName: "arrow.uturn.backward.circle")
-                    .foregroundColor(undoAvailable ? .yellow : .gray)
-                Image(systemName: "arrow.uturn.forward.circle")
-                    .foregroundColor(revertAvailable ? .yellow : .gray)
-                Spacer()
-                    .frame(width: 16)
-                Menu {
-                    Button(action: {
-                        triggerHapticFeedback()
-                        addNewCard()
-                    }) {
-                        Label("Create new", systemImage: "plus")
-                    }
-                    Button(action: {
-                        print("Show all")
-                    }) {
-                        Label("Show all", systemImage: "square.grid.2x2")
-                    }
-                    Button(role: .destructive, action: {
-                        removeCard()
-                    }) {
-                        Label("Delete", systemImage: "trash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle").foregroundColor(.yellow)
-                }
+                EditorToolbar(
+                    undoAvailable: $undoAvailable,
+                    revertAvailable: $revertAvailable,
+                    onAddNewCard: addNewCard,
+                    onRemoveCard: removeCard
+                )
             }
             
         }
