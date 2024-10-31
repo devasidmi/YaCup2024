@@ -19,7 +19,6 @@ struct DrawingPath: Identifiable {
     var color: Color
     var lineWidth: CGFloat
     
-    // Helper function to check if point is near the path
     func isPointNearPath(_ point: CGPoint, threshold: CGFloat) -> Bool {
         guard points.count > 1 else { return false }
         
@@ -37,7 +36,6 @@ struct DrawingPath: Identifiable {
         return false
     }
     
-    // Helper to find closest point on line segment
     private func closestPointOnLineSegment(start: CGPoint, end: CGPoint, point: CGPoint) -> CGPoint {
         let dx = end.x - start.x
         let dy = end.y - start.y
@@ -60,7 +58,6 @@ struct DrawingPath: Identifiable {
         )
     }
     
-    // Split path at point, returns two new paths
     func split(at point: CGPoint) -> (DrawingPath, DrawingPath)? {
         guard points.count > 1 else { return nil }
         

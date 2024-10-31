@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */; };
+		73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8A2CD3D6C500E22AA1 /* CardData.swift */; };
 		73B2C3222CD16AC4003F8F88 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3212CD16AC4003F8F88 /* CanvasView.swift */; };
 		73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3232CD16F83003F8F88 /* EditorView.swift */; };
 		73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3272CD188C2003F8F88 /* Utils.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCardView.swift; sourceTree = "<group>"; };
+		73846B8A2CD3D6C500E22AA1 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
 		73B2C3212CD16AC4003F8F88 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		73B2C3232CD16F83003F8F88 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		73B2C3272CD188C2003F8F88 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -40,6 +42,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		73846B892CD3D6BA00E22AA1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				73846B8A2CD3D6C500E22AA1 /* CardData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		73B2C3202CD16AB6003F8F88 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +79,7 @@
 		73C30DF52CCA8F70007AAA28 /* YaCup */ = {
 			isa = PBXGroup;
 			children = (
+				73846B892CD3D6BA00E22AA1 /* Models */,
 				73B2C3202CD16AB6003F8F88 /* Components */,
 				73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */,
 				73C30DF82CCA8F70007AAA28 /* ContentView.swift */,
@@ -164,6 +175,7 @@
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
 				73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,
+				73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */,
 				73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */,
 				73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */,
 				73B2C3222CD16AC4003F8F88 /* CanvasView.swift in Sources */,
