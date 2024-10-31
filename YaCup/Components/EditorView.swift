@@ -64,13 +64,6 @@ struct EditorView: View {
                                 editorState = (editorState == .erasing) ? .none : .erasing
                             }
                         }
-                    Spacer()
-                    Image(systemName: "square.and.pencil").imageScale(.large)
-                        .foregroundColor(.yellow)
-                        .onTapGesture {
-                            triggerHapticFeedback()
-                            addNewCard()
-                        }
                     if editorState == .drawing {
                         Spacer()
                         ColorPicker("Colors", selection: $drawColor).frame(width: 32, height: 32)
@@ -85,9 +78,28 @@ struct EditorView: View {
                     .foregroundColor(revertAvailable ? .yellow : .gray)
                 Spacer()
                     .frame(width: 16)
-                Image(systemName: "ellipsis.circle")
-                    .foregroundColor(Color.yellow)
+                Menu {
+                    Button(action: {
+                        triggerHapticFeedback()
+                        addNewCard()
+                    }) {
+                        Label("Create new", systemImage: "plus")
+                    }
+                    Button(action: {
+                        print("Show all")
+                    }) {
+                        Label("Show all", systemImage: "square.grid.2x2")
+                    }
+                    Button(role: .destructive, action: {
+                        print("Delete")
+                    }) {
+                        Label("Delete", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle").foregroundColor(.yellow)
+                }
             }
+            
         }
         
     }
