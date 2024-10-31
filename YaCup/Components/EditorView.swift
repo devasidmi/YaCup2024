@@ -40,6 +40,38 @@ struct EditorView: View {
         }
     }
     
+    private func removeCard() {
+        if cardData.count == 1 {
+            cardData.append(CardData(scale: 0.85))
+            
+            cardData.removeFirst()
+            
+            cardIndex = 0
+            
+            cardData[cardIndex].offsetX = 0
+            cardData[cardIndex].offsetY = 0
+            cardData[cardIndex].rotation = 0
+            
+            withAnimation(.spring(duration: 0.3)) {
+                cardData[cardIndex].scale = 1
+            }
+            return
+        }
+        
+        cardData.remove(at: cardIndex)
+        
+        cardIndex = cardData.count - 1
+        
+        cardData[cardIndex].offsetX = 0
+        cardData[cardIndex].offsetY = 0
+        cardData[cardIndex].rotation = 0
+        cardData[cardIndex].scale = 0.85
+        
+        withAnimation(.spring(duration: 0.3)) {
+            cardData[cardIndex].scale = 1
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -56,7 +88,7 @@ struct EditorView: View {
                             }
                         }
                     Spacer()
-                    Image(systemName: "eraser").imageScale(.large)
+                    Image(systemName: "eraser.line.dashed").imageScale(.large)
                         .foregroundColor(editorState == .erasing ? .yellow : .gray)
                         .onTapGesture {
                             triggerHapticFeedback()
@@ -91,7 +123,7 @@ struct EditorView: View {
                         Label("Show all", systemImage: "square.grid.2x2")
                     }
                     Button(role: .destructive, action: {
-                        print("Delete")
+                        removeCard()
                     }) {
                         Label("Delete", systemImage: "trash")
                     }
