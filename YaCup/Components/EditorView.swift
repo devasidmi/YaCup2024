@@ -18,6 +18,7 @@ struct EditorView: View {
     ]
     @State private var cardIndex: Int = 0
     
+    
     private func triggerHapticFeedback() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -72,10 +73,20 @@ struct EditorView: View {
         }
     }
     
+    private func onShowAll() {
+        triggerHapticFeedback()
+        withAnimation(.linear) {
+            editorState = editorState == .showAll ? .none : .showAll
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
-                CanvasView(editorState: $editorState, drawColor: $drawColor, cardData: $cardData)
+                CanvasView(editorState: $editorState,
+                           drawColor: $drawColor,
+                           cardData: $cardData
+                )
                 Spacer()
                 EditorControls(
                     editorState: $editorState,
@@ -91,14 +102,16 @@ struct EditorView: View {
                             editorState = (editorState == .erasing) ? .none : .erasing
                         }
                     }
-                )
+                ).opacity(editorState == .showAll ? 0 : 1)
             }
             .toolbar {
                 EditorToolbar(
+                    showAllMode: editorState == .showAll,
                     undoAvailable: $undoAvailable,
                     revertAvailable: $revertAvailable,
                     onAddNewCard: addNewCard,
-                    onRemoveCard: removeCard
+                    onRemoveCard: removeCard,
+                    onShowAll: onShowAll
                 )
             }
             

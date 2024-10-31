@@ -10,6 +10,7 @@ import SwiftUI
 enum EditorState {
     case drawing
     case erasing
+    case showAll
     case none
 }
 
