@@ -14,7 +14,7 @@ struct EditorView: View {
     @State private var revertAvailable: Bool = false
     @State private var drawColor = Color(.blue)
     @State private var cardData: [CardData] = [
-        CardData()
+        CardData(),
     ]
     @State private var cardIndex: Int = 0
     
@@ -73,6 +73,15 @@ struct EditorView: View {
         }
     }
     
+    private func onCardSelected(_ index: Int) {
+        cardData[cardIndex].offsetX = -1000
+        cardIndex = index
+        cardData[cardIndex].offsetX = 0
+        cardData[cardIndex].offsetY = 0
+        cardData[cardIndex].rotation = 0
+        cardData[cardIndex].scale = 1
+    }
+    
     private func onShowAll() {
         triggerHapticFeedback()
         withAnimation(.linear) {
@@ -83,10 +92,13 @@ struct EditorView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CanvasView(editorState: $editorState,
-                           drawColor: $drawColor,
-                           cardData: $cardData
-                )
+                if editorState == .showAll {
+                    CardsCarousel(cardData: $cardData, editorCardIndex: cardIndex, onCardSelected: onCardSelected)
+                } else {
+                    CanvasView(editorState: $editorState,
+                               drawColor: $drawColor,
+                               cardData: $cardData)
+                }
                 Spacer()
                 EditorControls(
                     editorState: $editorState,
