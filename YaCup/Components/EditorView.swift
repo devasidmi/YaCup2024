@@ -95,9 +95,10 @@ struct EditorView: View {
                 if editorState == .showAll {
                     CardsCarousel(cardData: $cardData, editorCardIndex: cardIndex, onCardSelected: onCardSelected)
                 } else {
-                    CanvasView(editorState: $editorState,
-                               drawColor: $drawColor,
-                               cardData: $cardData)
+                    EditorCardsView(editorState: $editorState,
+                                    drawColor: $drawColor,
+                                    cardData: $cardData
+                    )
                 }
                 Spacer()
                 EditorControls(

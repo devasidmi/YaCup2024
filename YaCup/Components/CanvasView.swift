@@ -1,27 +1,68 @@
 //
-//  CanvasView.swift
+//  Canvas.swift
 //  YaCup
 //
-//  Created by Vasiliy Dmitriev on 29.10.2024.
+//  Created by Vasiliy Dmitriev on 01.11.2024.
 //
 
 import SwiftUI
 
 struct CanvasView: View {
+    let mainPaths: [DrawingPath]
+    let opacityPaths: [DrawingPath]
+    let opacity: Double
     
-    @Binding var editorState: EditorState
-    @Binding var drawColor: Color
-    @Binding var cardData: [CardData]
+    let currentPath: DrawingPath?
+    let eraserPosition: CGPoint?
+    let eraserLineWidth: CGFloat
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach(Array(cardData.enumerated()), id: \.element.id) { index, _ in
-                    CanvasCardView(geometry: geometry, cardData: $cardData[index], editorState: $editorState, drawColor: $drawColor)
-                        .offset(x: cardData[index].offsetX, y: cardData[index].offsetY)
-                        .rotationEffect(.degrees(cardData[index].rotation))
-                        .scaleEffect(cardData[index].scale)
-                        .zIndex(Double(cardData.count - index))
+        Canvas { context, size in
+            context.drawLayer { layerContext in
+                for path in mainPaths {
+                    var stroke = Path()
+                    stroke.addLines(path.points)
+                    layerContext.stroke(
+                        stroke,
+                        with: .color(path.color),
+                        style: StrokeStyle(
+                            lineWidth: path.lineWidth,
+                            lineCap: .round,
+                            lineJoin: .round
+                        )
+                    )
+                }
+                
+                if let currentPath = currentPath {
+                    var stroke = Path()
+                    stroke.addLines(currentPath.points)
+                    layerContext.stroke(
+                        stroke,
+                        with: .color(currentPath.color),
+                        style: StrokeStyle(
+                            lineWidth: currentPath.lineWidth,
+                            lineCap: .round,
+                            lineJoin: .round
+                        )
+                    )
+                }
+            }
+            
+            context.opacity = opacity
+            context.drawLayer { layerContext in
+                for path in opacityPaths {
+                    var stroke = Path()
+                    let points = path.points.map { CGPoint(x: size.width - $0.x, y: $0.y) }
+                    stroke.addLines(points)
+                    layerContext.stroke(
+                        stroke,
+                        with: .color(path.color),
+                        style: StrokeStyle(
+                            lineWidth: path.lineWidth,
+                            lineCap: .round,
+                            lineJoin: .round
+                        )
+                    )
                 }
             }
         }

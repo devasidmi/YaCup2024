@@ -36,59 +36,14 @@ private struct AnimatedCanvas: View, Animatable {
     
     
     var body: some View {
-        Canvas { context, size in
-            let currentDrawingPaths = isFrontSide ? cardData.frontPaths : cardData.backPaths
-            
-            context.drawLayer { layerContext in
-                for path in currentDrawingPaths {
-                    var stroke = Path()
-                    stroke.addLines(path.points)
-                    layerContext.stroke(
-                        stroke,
-                        with: .color(path.color),
-                        style: StrokeStyle(
-                            lineWidth: path.lineWidth,
-                            lineCap: .round,
-                            lineJoin: .round
-                        )
-                    )
-                }
-                
-                if let currentPath = currentPath {
-                    var stroke = Path()
-                    stroke.addLines(currentPath.points)
-                    layerContext.stroke(
-                        stroke,
-                        with: .color(currentPath.color),
-                        style: StrokeStyle(
-                            lineWidth: currentPath.lineWidth,
-                            lineCap: .round,
-                            lineJoin: .round
-                        )
-                    )
-                }
-            }
-            
-            if !isFrontSide {
-                context.opacity = 0.3
-                context.drawLayer { layerContext in
-                    for path in cardData.frontPaths {
-                        var stroke = Path()
-                        let points = path.points.map { CGPoint(x: size.width - $0.x, y: $0.y) }
-                        stroke.addLines(points)
-                        layerContext.stroke(
-                            stroke,
-                            with: .color(path.color),
-                            style: StrokeStyle(
-                                lineWidth: path.lineWidth,
-                                lineCap: .round,
-                                lineJoin: .round
-                            )
-                        )
-                    }
-                }
-            }
-        }
+        CanvasView(
+            mainPaths: isFrontSide ? cardData.frontPaths : cardData.backPaths,
+            opacityPaths: !isFrontSide ? cardData.frontPaths : [],
+            opacity: !isFrontSide ? 0.3 : 1.0,
+            currentPath: currentPath,
+            eraserPosition: eraserPosition,
+            eraserLineWidth: eraserLineWidth
+        )
         .contentShape(Rectangle())
         .allowsHitTesting(editorState != .none)
         .gesture(editorState != .none ? drawingGesture(in: geometry) : nil)

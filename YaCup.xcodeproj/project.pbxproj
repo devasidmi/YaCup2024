@@ -12,7 +12,8 @@
 		73846B8D2CD41C4A00E22AA1 /* EditorToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8C2CD41C4A00E22AA1 /* EditorToolbar.swift */; };
 		73846B8F2CD41D1D00E22AA1 /* EditorControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8E2CD41D1D00E22AA1 /* EditorControls.swift */; };
 		73846B912CD4233E00E22AA1 /* CardsCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B902CD4233E00E22AA1 /* CardsCarousel.swift */; };
-		73B2C3222CD16AC4003F8F88 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3212CD16AC4003F8F88 /* CanvasView.swift */; };
+		73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B922CD44AC900E22AA1 /* CanvasView.swift */; };
+		73B2C3222CD16AC4003F8F88 /* EditorCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */; };
 		73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3232CD16F83003F8F88 /* EditorView.swift */; };
 		73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3272CD188C2003F8F88 /* Utils.swift */; };
 		73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */; };
@@ -27,7 +28,8 @@
 		73846B8C2CD41C4A00E22AA1 /* EditorToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbar.swift; sourceTree = "<group>"; };
 		73846B8E2CD41D1D00E22AA1 /* EditorControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorControls.swift; sourceTree = "<group>"; };
 		73846B902CD4233E00E22AA1 /* CardsCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCarousel.swift; sourceTree = "<group>"; };
-		73B2C3212CD16AC4003F8F88 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		73846B922CD44AC900E22AA1 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCardsView.swift; sourceTree = "<group>"; };
 		73B2C3232CD16F83003F8F88 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		73B2C3272CD188C2003F8F88 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73C30DF32CCA8F70007AAA28 /* YaCup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaCup.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,12 +61,13 @@
 		73B2C3202CD16AB6003F8F88 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				73B2C3212CD16AC4003F8F88 /* CanvasView.swift */,
+				73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */,
 				73B2C3232CD16F83003F8F88 /* EditorView.swift */,
 				73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */,
 				73846B8C2CD41C4A00E22AA1 /* EditorToolbar.swift */,
 				73846B8E2CD41D1D00E22AA1 /* EditorControls.swift */,
 				73846B902CD4233E00E22AA1 /* CardsCarousel.swift */,
+				73846B922CD44AC900E22AA1 /* CanvasView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73846B8D2CD41C4A00E22AA1 /* EditorToolbar.swift in Sources */,
+				73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
 				73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,
@@ -190,7 +194,7 @@
 				73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */,
 				73846B912CD4233E00E22AA1 /* CardsCarousel.swift in Sources */,
 				73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */,
-				73B2C3222CD16AC4003F8F88 /* CanvasView.swift in Sources */,
+				73B2C3222CD16AC4003F8F88 /* EditorCardsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
