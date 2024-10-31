@@ -26,16 +26,17 @@ struct EditorView: View {
     private func addNewCard() {
         let oldIndex = cardIndex
         
-        cardData.append(CardData(scale: 0.7))
+        cardData.append(CardData(scale: 0.85))
         cardIndex = cardData.count - 1
         
         withAnimation(.spring(duration: 1.2)) {
             cardData[oldIndex].offsetX = -1000
             cardData[oldIndex].offsetY = 0
             cardData[oldIndex].rotation = -15
-        }
-        withAnimation(.spring(duration: 1.3)) {
+            
             cardData[cardIndex].scale = 1
+            cardData[cardIndex].offsetY = 0
+            cardData[cardIndex].rotation = 0
         }
     }
     

@@ -30,7 +30,6 @@ private struct AnimatedCanvas: View, Animatable {
     var animatableData: Double {
         get { rotation }
         set {
-            print(newValue)
             rotation = newValue
         }
     }
@@ -135,10 +134,8 @@ private struct AnimatedCanvas: View, Animatable {
             .onEnded { _ in
                 if editorState == .drawing, let path = currentPath {
                     if isFrontSide {
-                        print("add front path")
                         cardData.frontPaths.append(path)
                     } else {
-                        print("add back path")
                         cardData.backPaths.append(path)
                     }
                 }

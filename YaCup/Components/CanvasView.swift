@@ -16,17 +16,14 @@ struct CanvasView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ForEach($cardData) { item in
-                    CanvasCardView(geometry: geometry, cardData: item, editorState: $editorState, drawColor: $drawColor)
-                        .offset(x: item.wrappedValue.offsetX, y: item.wrappedValue.offsetY)
-                        .rotationEffect(.degrees(item.wrappedValue.rotation))
-                        .scaleEffect(item.wrappedValue.scale)
+                ForEach(Array(cardData.enumerated()), id: \.element.id) { index, _ in
+                    CanvasCardView(geometry: geometry, cardData: $cardData[index], editorState: $editorState, drawColor: $drawColor)
+                        .offset(x: cardData[index].offsetX, y: cardData[index].offsetY)
+                        .rotationEffect(.degrees(cardData[index].rotation))
+                        .scaleEffect(cardData[index].scale)
+                        .zIndex(Double(cardData.count - index))
                 }
             }
         }
     }
 }
-
-//#Preview {
-//    CanvasView(editorState: .constant(.none), drawColor: .constant(.red))
-//}
