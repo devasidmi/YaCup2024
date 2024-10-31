@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditorToolbar: View {
+struct EditorToolbarView: View {
     var showAllMode: Bool
     @Binding var undoAvailable: Bool
     @Binding var revertAvailable: Bool

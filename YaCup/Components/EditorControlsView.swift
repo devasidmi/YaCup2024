@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditorControls: View {
+struct EditorControlsView: View {
     @Binding var editorState: EditorState
     @Binding var drawColor: Color
     

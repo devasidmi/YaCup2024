@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CardsCarousel: View {
+struct CardsCarouselView: View {
     @Binding var cardData: [CardData]
     var editorCardIndex: Int
     var onCardSelected: (Int) -> Void

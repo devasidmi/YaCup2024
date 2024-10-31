@@ -93,7 +93,7 @@ struct EditorView: View {
         NavigationStack {
             VStack {
                 if editorState == .showAll {
-                    CardsCarousel(cardData: $cardData, editorCardIndex: cardIndex, onCardSelected: onCardSelected)
+                    CardsCarouselView(cardData: $cardData, editorCardIndex: cardIndex, onCardSelected: onCardSelected)
                 } else {
                     EditorCardsView(editorState: $editorState,
                                     drawColor: $drawColor,
@@ -101,7 +101,7 @@ struct EditorView: View {
                     )
                 }
                 Spacer()
-                EditorControls(
+                EditorControlsView(
                     editorState: $editorState,
                     drawColor: $drawColor,
                     onEdit: {
@@ -118,7 +118,7 @@ struct EditorView: View {
                 ).opacity(editorState == .showAll ? 0 : 1)
             }
             .toolbar {
-                EditorToolbar(
+                EditorToolbarView(
                     showAllMode: editorState == .showAll,
                     undoAvailable: $undoAvailable,
                     revertAvailable: $revertAvailable,
