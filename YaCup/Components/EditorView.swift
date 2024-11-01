@@ -28,7 +28,7 @@ struct EditorView: View {
         let oldIndex = cardIndex
         
         var newCardData = copy ? cardData[oldIndex] : CardData(
-            frontPaths: cardData[oldIndex].backPaths.mirrored,
+            frontPaths: cardData[oldIndex].backPaths.isEmpty ? cardData[oldIndex].frontPaths : cardData[oldIndex].backPaths.mirrored,
             scale: 0.85
         )
         if copy {
