@@ -86,11 +86,7 @@ private struct AnimatedCanvas: View, Animatable {
             }
             .onEnded { _ in
                 if editorState == .drawing, let path = currentPath {
-                    if isFrontSide {
-                        cardData.frontPaths.append(path)
-                    } else {
-                        cardData.backPaths.append(path)
-                    }
+                    cardData.addPath(path, isFront: isFrontSide)
                 }
                 currentPath = nil
                 eraserPosition = nil
@@ -107,14 +103,20 @@ private struct AnimatedCanvas: View, Animatable {
         for path in paths {
             if path.isPointNearPath(point, threshold: eraserRadius) {
                 if let (firstHalf, secondHalf) = path.split(at: point, size: path.size) {
+                    var newPaths: [DrawingPath] = []
                     if firstHalf.points.count > 1 {
                         newPaths.append(firstHalf)
                     }
                     if secondHalf.points.count > 1 {
                         newPaths.append(secondHalf)
                     }
+                    
+                    if newPaths.isEmpty {
+                        cardData.removePath(path, isFront: isFrontSide)
+                    } else {
+                        cardData.splitPath(path, into: newPaths, isFront: isFrontSide)
+                    }
                 }
-                pathsToRemove.insert(path.id)
             }
         }
         

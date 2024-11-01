@@ -10,8 +10,6 @@ import SwiftUI
 struct EditorView: View {
     
     @State private var editorState: EditorState = .none
-    @State private var undoAvailable: Bool = false
-    @State private var revertAvailable: Bool = false
     @State private var drawColor = Color(.blue)
     @State private var cardData: [CardData] = [
         CardData(),
@@ -106,6 +104,14 @@ struct EditorView: View {
         }
     }
     
+    private func onUndo() {
+        cardData[cardIndex].undo()
+    }
+    
+    private func onRedo() {
+        cardData[cardIndex].redo()
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -137,13 +143,15 @@ struct EditorView: View {
             .toolbar {
                 EditorToolbarView(
                     showAllMode: editorState == .showAll,
-                    undoAvailable: $undoAvailable,
-                    revertAvailable: $revertAvailable,
+                    undoAvailable: cardData[cardIndex].canUndo,
+                    redoAvailable: cardData[cardIndex].canRedo,
                     totalCards: cardData.count,
                     onAddNewCard: addNewCard,
                     onRemoveCard: removeCard,
                     onRemoveAllCards: removeAllCards,
-                    onShowAll: onShowAll
+                    onShowAll: onShowAll,
+                    onUndo: onUndo,
+                    onRedo: onRedo
                 )
             }
             

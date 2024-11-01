@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EditorToolbarView: View {
     let showAllMode: Bool
-    @Binding var undoAvailable: Bool
-    @Binding var revertAvailable: Bool
+    var undoAvailable: Bool
+    var redoAvailable: Bool
     var totalCards: Int
     @State private var showDeleteConfirmation = false
     @State private var showDeleteAllConfirmation = false
@@ -19,6 +19,8 @@ struct EditorToolbarView: View {
     let onRemoveCard: () -> Void
     let onRemoveAllCards: () -> Void
     let onShowAll: () -> Void
+    let onUndo: () -> Void
+    let onRedo: () -> Void
     
     var body: some View {
         HStack {
@@ -31,10 +33,18 @@ struct EditorToolbarView: View {
                 }
                 .transition(.opacity)
             } else {
-                Image(systemName: "arrow.uturn.backward.circle")
-                    .foregroundColor(undoAvailable ? .yellow : .gray)
-                Image(systemName: "arrow.uturn.forward.circle")
-                    .foregroundColor(revertAvailable ? .yellow : .gray)
+                Button(action: {
+                    onUndo()
+                }) {
+                    Image(systemName: "arrow.uturn.backward.circle")
+                        .foregroundColor(undoAvailable ? .yellow : .gray)
+                }
+                Button(action: {
+                    onRedo()
+                }) {
+                    Image(systemName: "arrow.uturn.forward.circle")
+                        .foregroundColor(redoAvailable ? .yellow : .gray)
+                }
                 Spacer()
                     .frame(width: 16)
                 Menu {
