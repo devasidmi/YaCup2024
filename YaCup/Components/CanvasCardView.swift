@@ -74,6 +74,7 @@ private struct AnimatedCanvas: View, Animatable {
                 } else if editorState == .drawing {
                     if currentPath == nil {
                         currentPath = DrawingPath(
+                            size: geometry.size,
                             points: [location],
                             color: drawColor,
                             lineWidth: lineWidth
@@ -105,7 +106,7 @@ private struct AnimatedCanvas: View, Animatable {
         
         for path in paths {
             if path.isPointNearPath(point, threshold: eraserRadius) {
-                if let (firstHalf, secondHalf) = path.split(at: point) {
+                if let (firstHalf, secondHalf) = path.split(at: point, size: path.size) {
                     if firstHalf.points.count > 1 {
                         newPaths.append(firstHalf)
                     }

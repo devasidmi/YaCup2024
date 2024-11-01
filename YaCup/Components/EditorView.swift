@@ -27,7 +27,10 @@ struct EditorView: View {
     private func addNewCard(copy: Bool = false) {
         let oldIndex = cardIndex
         
-        var newCardData = copy ? cardData[oldIndex] : CardData(scale: 0.85)
+        var newCardData = copy ? cardData[oldIndex] : CardData(
+            frontPaths: cardData[oldIndex].frontPaths...cardData[oldIndex].backPaths.mirrored,
+            scale: 0.85
+        )
         if copy {
             newCardData.id = UUID()
         }

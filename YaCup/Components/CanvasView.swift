@@ -17,7 +17,13 @@ struct CanvasView: View {
             context.drawLayer { layerContext in
                 for path in mainPaths {
                     var stroke = Path()
-                    stroke.addLines(path.points)
+                    let scaledPoints = path.points.map { point in
+                        CGPoint(
+                            x: point.x * (size.width / path.size.width),
+                            y: point.y * (size.height / path.size.height)
+                        )
+                    }
+                    stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
                         with: .color(path.color),
@@ -31,7 +37,13 @@ struct CanvasView: View {
                 
                 if let currentPath = currentPath {
                     var stroke = Path()
-                    stroke.addLines(currentPath.points)
+                    let scaledPoints = currentPath.points.map { point in
+                        CGPoint(
+                            x: point.x * (size.width / currentPath.size.width),
+                            y: point.y * (size.height / currentPath.size.height)
+                        )
+                    }
+                    stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
                         with: .color(currentPath.color),
@@ -48,8 +60,13 @@ struct CanvasView: View {
             context.drawLayer { layerContext in
                 for path in opacityPaths {
                     var stroke = Path()
-                    let points = path.points.map { CGPoint(x: size.width - $0.x, y: $0.y) }
-                    stroke.addLines(points)
+                    let scaledPoints = path.points.map { point in
+                        CGPoint(
+                            x: size.width - (point.x * (size.width / path.size.width)),
+                            y: point.y * (size.height / path.size.height)
+                        )
+                    }
+                    stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
                         with: .color(path.color),

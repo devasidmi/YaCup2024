@@ -14,8 +14,10 @@ enum EditorState {
     case none
 }
 
+
 struct DrawingPath: Identifiable {
     let id = UUID()
+    var size: CGSize
     var points: [CGPoint]
     var color: Color
     var lineWidth: CGFloat
@@ -59,7 +61,7 @@ struct DrawingPath: Identifiable {
         )
     }
     
-    func split(at point: CGPoint) -> (DrawingPath, DrawingPath)? {
+    func split(at point: CGPoint, size: CGSize) -> (DrawingPath, DrawingPath)? {
         guard points.count > 1 else { return nil }
         
         var splitIndex = 0
@@ -81,8 +83,8 @@ struct DrawingPath: Identifiable {
         let secondHalf = Array(points[splitIndex + 1..<points.count])
         
         return (
-            DrawingPath(points: firstHalf, color: color, lineWidth: lineWidth),
-            DrawingPath(points: secondHalf, color: color, lineWidth: lineWidth)
+            DrawingPath(size: size, points: firstHalf, color: color, lineWidth: lineWidth),
+            DrawingPath(size: size, points: secondHalf, color: color, lineWidth: lineWidth)
         )
     }
 }
