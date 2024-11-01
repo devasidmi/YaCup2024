@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CardData: Identifiable {
-    let id = UUID()
+    var id = UUID()
     var frontPaths: [DrawingPath] = []
     var backPaths: [DrawingPath] = []
     var offsetX: CGFloat = 0

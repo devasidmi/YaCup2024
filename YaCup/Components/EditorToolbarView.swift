@@ -12,7 +12,7 @@ struct EditorToolbarView: View {
     @Binding var undoAvailable: Bool
     @Binding var revertAvailable: Bool
     
-    let onAddNewCard: () -> Void
+    let onAddNewCard: (_ copy: Bool) -> Void
     let onRemoveCard: () -> Void
     let onShowAll: () -> Void
     
@@ -35,10 +35,17 @@ struct EditorToolbarView: View {
                 Spacer()
                     .frame(width: 16)
                 Menu {
-                    Button(action: {
-                        onAddNewCard()
-                    }) {
-                        Label("Create new", systemImage: "plus")
+                    Section {
+                        Button(action: {
+                            onAddNewCard(false)
+                        }) {
+                            Label("Create new", systemImage: "plus")
+                        }
+                        Button(action: {
+                            onAddNewCard(true)
+                        }) {
+                            Label("Create copy", systemImage: "document.on.document")
+                        }
                     }
                     Button(action: {
                         onShowAll()

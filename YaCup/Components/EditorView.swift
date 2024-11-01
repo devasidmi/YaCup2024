@@ -24,10 +24,15 @@ struct EditorView: View {
         generator.impactOccurred()
     }
     
-    private func addNewCard() {
+    private func addNewCard(copy: Bool = false) {
         let oldIndex = cardIndex
         
-        cardData.append(CardData(scale: 0.85))
+        var newCardData = copy ? cardData[oldIndex] : CardData(scale: 0.85)
+        if copy {
+            newCardData.id = UUID()
+        }
+        
+        cardData.append(newCardData)
         cardIndex = cardData.count - 1
         
         withAnimation(.spring(duration: 1.2)) {
