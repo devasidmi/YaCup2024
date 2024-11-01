@@ -11,11 +11,11 @@ struct EditorToolbarView: View {
     let showAllMode: Bool
     @Binding var undoAvailable: Bool
     @Binding var revertAvailable: Bool
+    @State private var showDeleteConfirmation = false
     
     let onAddNewCard: (_ copy: Bool) -> Void
     let onRemoveCard: () -> Void
     let onShowAll: () -> Void
-    
     
     var body: some View {
         HStack {
@@ -54,7 +54,7 @@ struct EditorToolbarView: View {
                     }
                     Section {
                         Button(role: .destructive, action: {
-                            onRemoveCard()
+                            showDeleteConfirmation = true
                         }) {
                             Label("Delete", systemImage: "trash")
                         }
@@ -65,5 +65,13 @@ struct EditorToolbarView: View {
             }
         }
         .animation(.linear, value: showAllMode)
+        .alert("Delete Card", isPresented: $showDeleteConfirmation) {
+            Button("Delete", role: .destructive) {
+                onRemoveCard()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure you want to delete this card?")
+        }
     }
 }
