@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		730F8D4F2CD4F60C006274EE /* Array+Spread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F8D4E2CD4F60C006274EE /* Array+Spread.swift */; };
 		730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */; };
 		73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */; };
 		73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8A2CD3D6C500E22AA1 /* CardData.swift */; };
@@ -25,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		730F8D4E2CD4F60C006274EE /* Array+Spread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Spread.swift"; sourceTree = "<group>"; };
 		730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingPath+Mirror.swift"; sourceTree = "<group>"; };
 		73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCardView.swift; sourceTree = "<group>"; };
 		73846B8A2CD3D6C500E22AA1 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 		730F8D4D2CD4F5F9006274EE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				730F8D4E2CD4F60C006274EE /* Array+Spread.swift */,
 				730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */,
 			);
 			path = Extensions;
@@ -200,7 +197,6 @@
 			files = (
 				73846B8D2CD41C4A00E22AA1 /* EditorToolbarView.swift in Sources */,
 				73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */,
-				730F8D4F2CD4F60C006274EE /* Array+Spread.swift in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
 				73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,

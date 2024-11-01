@@ -28,7 +28,7 @@ struct EditorView: View {
         let oldIndex = cardIndex
         
         var newCardData = copy ? cardData[oldIndex] : CardData(
-            frontPaths: cardData[oldIndex].frontPaths...cardData[oldIndex].backPaths.mirrored,
+            frontPaths: cardData[oldIndex].backPaths.mirrored,
             scale: 0.85
         )
         if copy {
@@ -75,6 +75,15 @@ struct EditorView: View {
         cardData[cardIndex].offsetY = 0
         cardData[cardIndex].rotation = 0
         cardData[cardIndex].scale = 0.85
+        
+        withAnimation(.spring(duration: 0.3)) {
+            cardData[cardIndex].scale = 1
+        }
+    }
+    
+    private func removeAllCards() {
+        cardData = [CardData(scale: 0.85)]
+        cardIndex = 0
         
         withAnimation(.spring(duration: 0.3)) {
             cardData[cardIndex].scale = 1
@@ -130,8 +139,10 @@ struct EditorView: View {
                     showAllMode: editorState == .showAll,
                     undoAvailable: $undoAvailable,
                     revertAvailable: $revertAvailable,
+                    totalCards: cardData.count,
                     onAddNewCard: addNewCard,
                     onRemoveCard: removeCard,
+                    onRemoveAllCards: removeAllCards,
                     onShowAll: onShowAll
                 )
             }

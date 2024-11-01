@@ -11,10 +11,13 @@ struct EditorToolbarView: View {
     let showAllMode: Bool
     @Binding var undoAvailable: Bool
     @Binding var revertAvailable: Bool
+    var totalCards: Int
     @State private var showDeleteConfirmation = false
+    @State private var showDeleteAllConfirmation = false
     
     let onAddNewCard: (_ copy: Bool) -> Void
     let onRemoveCard: () -> Void
+    let onRemoveAllCards: () -> Void
     let onShowAll: () -> Void
     
     var body: some View {
@@ -53,6 +56,13 @@ struct EditorToolbarView: View {
                         Label("Show all", systemImage: "square.grid.2x2")
                     }
                     Section {
+                        if (totalCards > 1) {
+                            Button(role: .destructive, action: {
+                                showDeleteAllConfirmation = true
+                            }) {
+                                Label("Delete all (\(totalCards))", systemImage: "xmark.bin")
+                            }
+                        }
                         Button(role: .destructive, action: {
                             showDeleteConfirmation = true
                         }) {
@@ -72,6 +82,14 @@ struct EditorToolbarView: View {
             Button("Cancel", role: .cancel) { }
         } message: {
             Text("Are you sure you want to delete this card?")
+        }
+        .alert("Delete All Cards", isPresented: $showDeleteAllConfirmation) {
+            Button("Delete", role: .destructive) {
+                onRemoveAllCards()
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure you want to delete all cards?")
         }
     }
 }
