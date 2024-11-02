@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var coordinator: ViewCoordinator
     
     var body: some View {
@@ -16,7 +17,7 @@ struct LibraryView: View {
                 
             }
             .sheet(isPresented: $coordinator.isSettingsPresented) {
-                SettingsView()
+                SettingsView().environment(\.colorScheme, colorScheme)
             }
             .navigationTitle("Library")
             .toolbar {

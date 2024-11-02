@@ -10,9 +10,10 @@ import SwiftUI
 @main
 struct YaCupApp: App {
     @StateObject private var coordinator = ViewCoordinator()
-    @AppStorage("selectedTheme") private var selectedTheme = "system"
+    @Environment (\.colorScheme) var systemColorScheme
+    @AppStorage("appTheme") private var selectedTheme = "system"
     
-    private var colorScheme: ColorScheme? {
+    private var appColorScheme: ColorScheme? {
         switch selectedTheme {
         case "dark":
             return .dark
@@ -32,9 +33,10 @@ struct YaCupApp: App {
                         .preferredColorScheme(.dark)
                 case .library:
                     LibraryView(coordinator: coordinator)
-                        .preferredColorScheme(colorScheme)
+                        .preferredColorScheme(appColorScheme)
                 case .editor:
-                    EditorView().preferredColorScheme(colorScheme)
+                    EditorView()
+                        .preferredColorScheme(appColorScheme)
                 }
             }
         }

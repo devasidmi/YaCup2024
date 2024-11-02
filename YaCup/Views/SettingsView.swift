@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @AppStorage("selectedLanguage") private var selectedLanguage = "en"
-    @AppStorage("selectedTheme") private var selectedTheme = "system"
+    @AppStorage("appTheme") private var selectedTheme = "system"
     
-    let languages = [
+    private let languages = [
         ("en", "English"),
         ("ru", "Русский")
     ]
     
-    let themes = [
+    private let themes = [
         ("system", "System"),
         ("dark", "Dark"),
         ("light", "Light")
     ]
     
-    private var systemColorSheme: ColorScheme? {
+    private var appColorScheme: ColorScheme? {
         switch selectedTheme {
         case "dark":
             return .dark
@@ -83,8 +84,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .background(Color(uiColor: .systemGroupedBackground))
-        }
-        .preferredColorScheme(systemColorSheme)
+        }.preferredColorScheme(appColorScheme)
     }
     
 }
