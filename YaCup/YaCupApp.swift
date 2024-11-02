@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct YaCupApp: App {
+    @StateObject private var coordinator = ViewCoordinator()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Group {
+                switch coordinator.currentScreen {
+                case .splash:
+                    SplashView(coordinator: coordinator)
+                case .main:
+                    ContentView()
+                }
+            }
         }
     }
 }

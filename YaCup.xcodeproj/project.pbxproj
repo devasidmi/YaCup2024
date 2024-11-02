@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */; };
 		731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731882B82CD5451300C9E379 /* DrawHistoryManager.swift */; };
+		736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0EE2CD657110079D445 /* ViewCoordinator.swift */; };
+		736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F12CD6576C0079D445 /* SplashView.swift */; };
 		73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */; };
 		73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8A2CD3D6C500E22AA1 /* CardData.swift */; };
 		73846B8D2CD41C4A00E22AA1 /* EditorToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8C2CD41C4A00E22AA1 /* EditorToolbarView.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingPath+Mirror.swift"; sourceTree = "<group>"; };
 		731882B82CD5451300C9E379 /* DrawHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHistoryManager.swift; sourceTree = "<group>"; };
+		736DA0EE2CD657110079D445 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
+		736DA0F12CD6576C0079D445 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCardView.swift; sourceTree = "<group>"; };
 		73846B8A2CD3D6C500E22AA1 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
 		73846B8C2CD41C4A00E22AA1 /* EditorToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarView.swift; sourceTree = "<group>"; };
@@ -60,6 +64,15 @@
 				730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		736DA0F02CD6575C0079D445 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73C30DF82CCA8F70007AAA28 /* ContentView.swift */,
+				736DA0F12CD6576C0079D445 /* SplashView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		73846B892CD3D6BA00E22AA1 /* Models */ = {
@@ -103,15 +116,16 @@
 		73C30DF52CCA8F70007AAA28 /* YaCup */ = {
 			isa = PBXGroup;
 			children = (
+				736DA0F02CD6575C0079D445 /* Views */,
 				731882B82CD5451300C9E379 /* DrawHistoryManager.swift */,
 				730F8D4D2CD4F5F9006274EE /* Extensions */,
 				73846B892CD3D6BA00E22AA1 /* Models */,
 				73B2C3202CD16AB6003F8F88 /* Components */,
 				73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */,
-				73C30DF82CCA8F70007AAA28 /* ContentView.swift */,
 				73C30DFA2CCA8F71007AAA28 /* Assets.xcassets */,
 				73C30DFC2CCA8F71007AAA28 /* Preview Content */,
 				73B2C3272CD188C2003F8F88 /* Utils.swift */,
+				736DA0EE2CD657110079D445 /* ViewCoordinator.swift */,
 			);
 			path = YaCup;
 			sourceTree = "<group>";
@@ -200,6 +214,7 @@
 			files = (
 				73846B8D2CD41C4A00E22AA1 /* EditorToolbarView.swift in Sources */,
 				73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */,
+				736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
 				73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */,
 				731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */,
@@ -211,6 +226,7 @@
 				73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */,
 				73B2C3222CD16AC4003F8F88 /* EditorCardsView.swift in Sources */,
 				730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */,
+				736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
