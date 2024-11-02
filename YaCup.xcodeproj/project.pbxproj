@@ -11,6 +11,8 @@
 		731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731882B82CD5451300C9E379 /* DrawHistoryManager.swift */; };
 		736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0EE2CD657110079D445 /* ViewCoordinator.swift */; };
 		736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F12CD6576C0079D445 /* SplashView.swift */; };
+		736DA0F42CD661190079D445 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F32CD661190079D445 /* LibraryView.swift */; };
+		736DA0F62CD662E80079D445 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F52CD662E80079D445 /* SettingsView.swift */; };
 		73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */; };
 		73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8A2CD3D6C500E22AA1 /* CardData.swift */; };
 		73846B8D2CD41C4A00E22AA1 /* EditorToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73846B8C2CD41C4A00E22AA1 /* EditorToolbarView.swift */; };
@@ -21,7 +23,6 @@
 		73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3232CD16F83003F8F88 /* EditorView.swift */; };
 		73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3272CD188C2003F8F88 /* Utils.swift */; };
 		73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */; };
-		73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C30DF82CCA8F70007AAA28 /* ContentView.swift */; };
 		73C30DFB2CCA8F71007AAA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C30DFA2CCA8F71007AAA28 /* Assets.xcassets */; };
 		73C30DFE2CCA8F71007AAA28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C30DFD2CCA8F71007AAA28 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,8 @@
 		731882B82CD5451300C9E379 /* DrawHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHistoryManager.swift; sourceTree = "<group>"; };
 		736DA0EE2CD657110079D445 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
 		736DA0F12CD6576C0079D445 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		736DA0F32CD661190079D445 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		736DA0F52CD662E80079D445 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCardView.swift; sourceTree = "<group>"; };
 		73846B8A2CD3D6C500E22AA1 /* CardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardData.swift; sourceTree = "<group>"; };
 		73846B8C2CD41C4A00E22AA1 /* EditorToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorToolbarView.swift; sourceTree = "<group>"; };
@@ -42,7 +45,6 @@
 		73B2C3272CD188C2003F8F88 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73C30DF32CCA8F70007AAA28 /* YaCup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaCup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaCupApp.swift; sourceTree = "<group>"; };
-		73C30DF82CCA8F70007AAA28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		73C30DFA2CCA8F71007AAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73C30DFD2CCA8F71007AAA28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,8 +71,10 @@
 		736DA0F02CD6575C0079D445 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73C30DF82CCA8F70007AAA28 /* ContentView.swift */,
+				73B2C3232CD16F83003F8F88 /* EditorView.swift */,
 				736DA0F12CD6576C0079D445 /* SplashView.swift */,
+				736DA0F32CD661190079D445 /* LibraryView.swift */,
+				736DA0F52CD662E80079D445 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -87,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */,
-				73B2C3232CD16F83003F8F88 /* EditorView.swift */,
 				73846B7E2CD3C90100E22AA1 /* CanvasCardView.swift */,
 				73846B8C2CD41C4A00E22AA1 /* EditorToolbarView.swift */,
 				73846B8E2CD41D1D00E22AA1 /* EditorControlsView.swift */,
@@ -216,14 +219,15 @@
 				73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */,
 				736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
-				73C30DF92CCA8F70007AAA28 /* ContentView.swift in Sources */,
 				731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,
 				73846B8F2CD41D1D00E22AA1 /* EditorControlsView.swift in Sources */,
 				73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */,
 				73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */,
+				736DA0F62CD662E80079D445 /* SettingsView.swift in Sources */,
 				73846B912CD4233E00E22AA1 /* CardsCarouselView.swift in Sources */,
 				73846B7F2CD3C90100E22AA1 /* CanvasCardView.swift in Sources */,
+				736DA0F42CD661190079D445 /* LibraryView.swift in Sources */,
 				73B2C3222CD16AC4003F8F88 /* EditorCardsView.swift in Sources */,
 				730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */,
 				736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */,

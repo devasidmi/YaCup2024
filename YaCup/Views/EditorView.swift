@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EditorView: View {
-    
     @State private var editorState: EditorState = .none
     @State private var drawColor = Color(.blue)
     @State private var cardData: [CardData] = [

@@ -9,15 +9,21 @@ import SwiftUI
 
 final class ViewCoordinator: ObservableObject {
     @Published var currentScreen: Screen = .splash
+    @Published var isSettingsPresented: Bool = false
     
     enum Screen {
         case splash
-        case main
+        case library
+        case editor
     }
     
     func showMainScreen() {
         withAnimation {
-            currentScreen = .main
+            currentScreen = .library
         }
+    }
+    
+    func openSettings() {
+        isSettingsPresented = true
     }
 }
