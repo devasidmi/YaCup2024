@@ -35,6 +35,12 @@ struct CardsCarouselView: View {
                                         mainPaths: cardData[index].frontPaths,
                                         opacityPaths: []
                                     )
+                                    .mask(
+                                        Image("Card")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .padding(16)
+                                    )
                                 }
                                 Circle()
                                     .frame(width: 32, height: 32)
