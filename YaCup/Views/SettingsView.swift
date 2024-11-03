@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.locale) private var locale
+    
     @AppStorage("selectedLanguage") private var selectedLanguage = "en"
     @AppStorage("appTheme") private var selectedTheme = "system"
     
@@ -18,9 +20,9 @@ struct SettingsView: View {
     ]
     
     private let themes = [
-        ("system", "System"),
-        ("dark", "Dark"),
-        ("light", "Light")
+        ("system", LocalizedStringKey("System")),
+        ("dark", LocalizedStringKey("Dark")),
+        ("light", LocalizedStringKey("Light"))
     ]
     
     private var appColorScheme: ColorScheme? {
@@ -38,6 +40,7 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 VStack(spacing: 20) {
+                    Spacer().frame(height: 16)
                     HStack {
                         Image(systemName: "translate")
                         Text("Language")
@@ -63,7 +66,8 @@ struct SettingsView: View {
                                 Text(theme.1).tag(theme.0)
                             }
                         }
-                        .pickerStyle(.segmented)
+                        .pickerStyle(.menu)
+                        .accentColor(.primary)
                         .fixedSize()
                     }
                     .padding()
@@ -76,9 +80,17 @@ struct SettingsView: View {
                 Text("👨🏻‍💻 Made by @vasidmi")
                     .foregroundColor(.secondary)
             }
-            .navigationTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Settings")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top, 64)
+                }
+            }
             .background(Color(uiColor: .systemGroupedBackground))
-        }.preferredColorScheme(appColorScheme)
+        }
+        .preferredColorScheme(appColorScheme)
     }
     
 }

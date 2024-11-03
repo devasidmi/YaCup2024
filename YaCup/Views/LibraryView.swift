@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LibraryView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.locale) private var locale
     
     @ObservedObject var coordinator: ViewCoordinator
     @State private var isNewProjectDialogShown = false
@@ -59,7 +60,7 @@ struct LibraryView: View {
                             .overlay(
                                 HStack {
                                     Image(systemName: "plus.circle.fill")
-                                    Text("Create New")
+                                    Text("Create new")
                                         .fontWeight(.semibold)
                                 }
                                     .foregroundColor(.black)
@@ -70,7 +71,9 @@ struct LibraryView: View {
                 }
             }
             .sheet(isPresented: $coordinator.isSettingsPresented) {
-                SettingsView().environment(\.colorScheme, colorScheme)
+                SettingsView()
+                    .environment(\.colorScheme, colorScheme)
+                    .environment(\.locale, locale)
             }
             .alert("New Project", isPresented: $isNewProjectDialogShown) {
                 TextField("Project name", text: $newProjectName)
@@ -84,8 +87,12 @@ struct LibraryView: View {
             .navigationDestination(for: ProjectData.self) { project in
                 EditorView(project: project)
             }
-            .navigationTitle("Projects")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Projects")
+                        .font(.largeTitle)
+                        .bold()
+                }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         coordinator.openSettings()

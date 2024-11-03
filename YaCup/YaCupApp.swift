@@ -14,6 +14,7 @@ struct YaCupApp: App {
     @Environment(\.colorScheme) var systemColorScheme
     
     @AppStorage("appTheme") private var selectedTheme = "system"
+    @AppStorage("selectedLanguage") private var selectedLanguage = "en"
     
     private var appColorScheme: ColorScheme? {
         switch selectedTheme {
@@ -36,8 +37,11 @@ struct YaCupApp: App {
                 case .library:
                     LibraryView(coordinator: coordinator)
                         .preferredColorScheme(appColorScheme)
+                        .environment(\.locale, Locale(identifier: selectedLanguage))
                 }
-            }.environment(\.managedObjectContext, ProjectsDataProvider.shared.viewContext)
+            }
+            .environment(\.managedObjectContext, ProjectsDataProvider.shared.viewContext)
+            .environment(\.locale, Locale(identifier: selectedLanguage))
         }
     }
 }
