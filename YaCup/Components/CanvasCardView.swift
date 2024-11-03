@@ -76,7 +76,7 @@ private struct AnimatedCanvas: View, Animatable {
                         currentPath = DrawingPath(
                             size: geometry.size,
                             points: [location],
-                            color: drawColor,
+                            colorHex: $drawColor.wrappedValue.toHex() ?? Color.blue.toHex()!,
                             lineWidth: lineWidth
                         )
                     } else {
@@ -97,8 +97,8 @@ private struct AnimatedCanvas: View, Animatable {
         let paths = isFrontSide ? cardData.frontPaths : cardData.backPaths
         let eraserRadius = eraserLineWidth / 2
         
-        var newPaths: [DrawingPath] = []
-        var pathsToRemove: Set<UUID> = []
+        let newPaths: [DrawingPath] = []
+        let pathsToRemove: Set<UUID> = []
         
         for path in paths {
             if path.isPointNearPath(point, threshold: eraserRadius) {
@@ -138,7 +138,6 @@ struct CanvasCardView: View {
     @Binding var drawColor: Color
     
     @State private var initialRotation: Double = 0.0
-    @State private var isAnimating = false
     @State private var isDragging = false
     @State private var rotation: Double = 0.0
     
@@ -161,54 +160,45 @@ struct CanvasCardView: View {
             AnimatedCanvas(geometry: geometry, rotation: rotation, cardData: $cardData, drawColor: $drawColor, editorState: $editorState)
         }
         .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
-        .gesture(flipGesture)
+        .gesture(flipEnabled ? flipGesture : nil)
     }
     
     
     private var flipGesture: some Gesture {
         DragGesture()
             .onChanged { gesture in
-                if flipEnabled && !isAnimating {
-                    let translation = gesture.translation.width
-                    let screenWidth = UIScreen.main.bounds.width
-                    
-                    if !isDragging {
-                        isDragging = true
-                        initialRotation = rotation
-                    }
-                    
-                    let progress = translation / screenWidth
-                    let rotationDelta = Double(progress) * flipAngle
-                    
-                    rotation = initialRotation + rotationDelta
+                if !isDragging {
+                    isDragging = true
+                    initialRotation = rotation
                 }
+                
+                let translation = gesture.translation.width
+                let screenWidth = UIScreen.main.bounds.width
+                let progress = translation / screenWidth
+                let rotationDelta = Double(progress) * flipAngle
+                
+                rotation = initialRotation + rotationDelta
             }
             .onEnded { gesture in
-                if flipEnabled {
-                    let translation = gesture.translation.width
-                    let screenWidth = UIScreen.main.bounds.width
-                    let progress = translation / screenWidth
+                let translation = gesture.translation.width
+                let screenWidth = UIScreen.main.bounds.width
+                let progress = translation / screenWidth
+                
+                let threshold = thresholdPercentage
+                
+                if abs(progress) > threshold {
+                    let direction: Double = progress > 0 ? 1 : -1
+                    let targetRotation = initialRotation + flipAngle * direction
                     
-                    let threshold = thresholdPercentage
-                    
-                    if abs(progress) > threshold {
-                        isAnimating = true
-                        let direction: Double = progress > 0 ? 1 : -1
-                        let targetRotation = initialRotation + flipAngle * direction
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            rotation = targetRotation
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            isAnimating = false
-                        }
-                    } else {
-                        withAnimation(.spring()) {
-                            rotation = initialRotation
-                        }
+                    withAnimation(.interpolatingSpring(stiffness: 300, damping: 30)) {
+                        rotation = targetRotation
                     }
-                    isDragging = false
+                } else {
+                    withAnimation(.interpolatingSpring(stiffness: 300, damping: 30)) {
+                        rotation = initialRotation
+                    }
                 }
+                isDragging = false
             }
     }
 }

@@ -19,12 +19,6 @@
     },
     "%lld" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33,14 +27,18 @@
         }
       }
     },
-    "👨🏻‍💻 Made by @vasidmi" : {
+    "%lld cards" : {
       "localizations" : {
-        "en" : {
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👨🏻‍💻 Made by @vasidmi"
+            "value" : "%lld карточек"
           }
-        },
+        }
+      }
+    },
+    "👨🏻‍💻 Made by @vasidmi" : {
+      "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -51,12 +49,6 @@
     },
     "Are you sure you want to delete all cards?" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to delete all cards?"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67,12 +59,6 @@
     },
     "Are you sure you want to delete this card?" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to delete this card?"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83,12 +69,6 @@
     },
     "Cancel" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -99,12 +79,6 @@
     },
     "Colors" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Colors"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -115,12 +89,6 @@
     },
     "Create copy" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create copy"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -131,12 +99,6 @@
     },
     "Create new" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create new"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -145,14 +107,18 @@
         }
       }
     },
-    "Delete" : {
+    "Create New" : {
       "localizations" : {
-        "en" : {
+        "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete"
+            "value" : "Создать новый"
           }
-        },
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -163,12 +129,6 @@
     },
     "Delete all (%lld)" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete all (%lld)"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -179,12 +139,6 @@
     },
     "Delete All Cards" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete All Cards"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -195,12 +149,6 @@
     },
     "Delete Card" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete card"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -211,12 +159,6 @@
     },
     "Done" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -227,12 +169,6 @@
     },
     "Language" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Language"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -241,30 +177,18 @@
         }
       }
     },
-    "Library" : {
+    "Projects" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Library"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Библиотека"
+            "value" : "Проекты"
           }
         }
       }
     },
     "Settings" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -275,12 +199,6 @@
     },
     "Show all" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show all"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -291,12 +209,6 @@
     },
     "Theme" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Theme"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",

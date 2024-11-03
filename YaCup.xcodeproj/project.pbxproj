@@ -24,6 +24,11 @@
 		73B2C3222CD16AC4003F8F88 /* EditorCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */; };
 		73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3232CD16F83003F8F88 /* EditorView.swift */; };
 		73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B2C3272CD188C2003F8F88 /* Utils.swift */; };
+		73B56FCD2CD7AD5800CDA967 /* ProjectsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B56FCC2CD7AD5800CDA967 /* ProjectsDataProvider.swift */; };
+		73B56FD02CD7ADB400CDA967 /* YaCup.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73B56FCE2CD7ADB400CDA967 /* YaCup.xcdatamodeld */; };
+		73B56FD22CD7BF9400CDA967 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B56FD12CD7BF9400CDA967 /* Color+Hex.swift */; };
+		73B56FD42CD7D32400CDA967 /* ProjectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B56FD32CD7D32400CDA967 /* ProjectCard.swift */; };
+		73B56FD62CD7DF9800CDA967 /* ProjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B56FD52CD7DF9800CDA967 /* ProjectData.swift */; };
 		73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */; };
 		73C30DFB2CCA8F71007AAA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C30DFA2CCA8F71007AAA28 /* Assets.xcassets */; };
 		73C30DFE2CCA8F71007AAA28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C30DFD2CCA8F71007AAA28 /* Preview Assets.xcassets */; };
@@ -47,6 +52,11 @@
 		73B2C3212CD16AC4003F8F88 /* EditorCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorCardsView.swift; sourceTree = "<group>"; };
 		73B2C3232CD16F83003F8F88 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		73B2C3272CD188C2003F8F88 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		73B56FCC2CD7AD5800CDA967 /* ProjectsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsDataProvider.swift; sourceTree = "<group>"; };
+		73B56FCF2CD7ADB400CDA967 /* YaCup.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YaCup.xcdatamodel; sourceTree = "<group>"; };
+		73B56FD12CD7BF9400CDA967 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		73B56FD32CD7D32400CDA967 /* ProjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCard.swift; sourceTree = "<group>"; };
+		73B56FD52CD7DF9800CDA967 /* ProjectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectData.swift; sourceTree = "<group>"; };
 		73C30DF32CCA8F70007AAA28 /* YaCup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YaCup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C30DF62CCA8F70007AAA28 /* YaCupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaCupApp.swift; sourceTree = "<group>"; };
 		73C30DFA2CCA8F71007AAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */,
+				73B56FD12CD7BF9400CDA967 /* Color+Hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -87,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				73846B8A2CD3D6C500E22AA1 /* CardData.swift */,
+				73B56FD52CD7DF9800CDA967 /* ProjectData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -100,6 +112,7 @@
 				73846B8E2CD41D1D00E22AA1 /* EditorControlsView.swift */,
 				73846B902CD4233E00E22AA1 /* CardsCarouselView.swift */,
 				73846B922CD44AC900E22AA1 /* CanvasView.swift */,
+				73B56FD32CD7D32400CDA967 /* ProjectCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -109,6 +122,7 @@
 			children = (
 				73050F072CD69CE70042A588 /* Localizable.xcstrings */,
 				73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */,
+				73B56FCE2CD7ADB400CDA967 /* YaCup.xcdatamodeld */,
 				73C30DF52CCA8F70007AAA28 /* YaCup */,
 				73C30DF42CCA8F70007AAA28 /* Products */,
 			);
@@ -125,6 +139,7 @@
 		73C30DF52CCA8F70007AAA28 /* YaCup */ = {
 			isa = PBXGroup;
 			children = (
+				73B56FCC2CD7AD5800CDA967 /* ProjectsDataProvider.swift */,
 				736DA0F02CD6575C0079D445 /* Views */,
 				731882B82CD5451300C9E379 /* DrawHistoryManager.swift */,
 				730F8D4D2CD4F5F9006274EE /* Extensions */,
@@ -177,7 +192,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					73C30DF22CCA8F70007AAA28 = {
 						CreatedOnToolsVersion = 15.2;
@@ -227,9 +242,14 @@
 				73846B8D2CD41C4A00E22AA1 /* EditorToolbarView.swift in Sources */,
 				73846B932CD44AC900E22AA1 /* CanvasView.swift in Sources */,
 				736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */,
+				73B56FD02CD7ADB400CDA967 /* YaCup.xcdatamodeld in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
 				731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */,
+				73B56FD62CD7DF9800CDA967 /* ProjectData.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,
+				73B56FD22CD7BF9400CDA967 /* Color+Hex.swift in Sources */,
+				73B56FCD2CD7AD5800CDA967 /* ProjectsDataProvider.swift in Sources */,
+				73B56FD42CD7D32400CDA967 /* ProjectCard.swift in Sources */,
 				73846B8F2CD41D1D00E22AA1 /* EditorControlsView.swift in Sources */,
 				73846B8B2CD3D6C500E22AA1 /* CardData.swift in Sources */,
 				73C30DF72CCA8F70007AAA28 /* YaCupApp.swift in Sources */,
@@ -251,6 +271,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -314,6 +335,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -457,6 +479,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		73B56FCE2CD7ADB400CDA967 /* YaCup.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				73B56FCF2CD7ADB400CDA967 /* YaCup.xcdatamodel */,
+			);
+			currentVersion = 73B56FCF2CD7ADB400CDA967 /* YaCup.xcdatamodel */;
+			path = YaCup.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 73C30DEB2CCA8F70007AAA28 /* Project object */;
 }

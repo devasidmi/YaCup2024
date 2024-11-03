@@ -8,14 +8,57 @@
 import Foundation
 import SwiftUI
 
-struct CardData: Identifiable {
+struct CardData: Identifiable, Codable {
     var id = UUID()
-    var frontPaths: [DrawingPath] = []
-    var backPaths: [DrawingPath] = []
-    var offsetX: CGFloat = 0
-    var offsetY: CGFloat = 0
-    var rotation: Double = 0
-    var scale: CGFloat = 1
+    var frontPaths: [DrawingPath]
+    var backPaths: [DrawingPath]
+    var offsetX: Double
+    var offsetY: Double
+    var rotation: Double
+    var scale: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case id, frontPaths, backPaths, offsetX, offsetY, rotation, scale
+    }
+    
+    init(id: UUID = UUID(),
+         frontPaths: [DrawingPath] = [],
+         backPaths: [DrawingPath] = [],
+         offsetX: Double = 0,
+         offsetY: Double = 0,
+         rotation: Double = 0,
+         scale: Double = 1
+    ) {
+        self.id = id
+        self.frontPaths = frontPaths
+        self.backPaths = backPaths
+        self.offsetX = offsetX
+        self.offsetY = offsetY
+        self.rotation = rotation
+        self.scale = scale
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        frontPaths = try container.decode([DrawingPath].self, forKey: .frontPaths)
+        backPaths = try container.decode([DrawingPath].self, forKey: .backPaths)
+        offsetX = try container.decode(Double.self, forKey: .offsetX)
+        offsetY = try container.decode(Double.self, forKey: .offsetY)
+        rotation = try container.decode(Double.self, forKey: .rotation)
+        scale = try container.decode(Double.self, forKey: .scale)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(frontPaths, forKey: .frontPaths)
+        try container.encode(backPaths, forKey: .backPaths)
+        try container.encode(Double(offsetX), forKey: .offsetX)
+        try container.encode(Double(offsetY), forKey: .offsetY)
+        try container.encode(rotation, forKey: .rotation)
+        try container.encode(Double(scale), forKey: .scale)
+    }
     
     private let historyManager = DrawHistoryManager()
     

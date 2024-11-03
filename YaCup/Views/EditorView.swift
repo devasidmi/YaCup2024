@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct EditorView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State private var editorState: EditorState = .none
     @State private var drawColor = Color(.blue)
     @State private var cardData: [CardData] = [
@@ -15,6 +19,26 @@ struct EditorView: View {
     ]
     @State private var cardIndex: Int = 0
     
+    let project: ProjectData
+    
+    init(project: ProjectData) {
+        self.project = project
+        
+        if let data = project.cardsData,
+           let decodedCards = try? JSONDecoder().decode([CardData].self, from: data) {
+            _cardData = State(initialValue: decodedCards)
+            _cardIndex = State(initialValue: decodedCards.count - 1)
+        } else {
+            _cardData = State(initialValue: [CardData()])
+            _cardIndex = State(initialValue: 0)
+        }
+    }
+    
+    private func saveProject() {
+        onCardSelected(cardData.count - 1)
+        project.cardsData = try? JSONEncoder().encode(cardData)
+        try? viewContext.save()
+    }
     
     private func triggerHapticFeedback() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -112,7 +136,7 @@ struct EditorView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 if editorState == .showAll {
                     CardsCarouselView(cardData: $cardData, editorCardIndex: cardIndex, onCardSelected: onCardSelected)
@@ -153,12 +177,9 @@ struct EditorView: View {
                     onRedo: onRedo
                 )
             }
-            
+            .onDisappear {
+                saveProject()
+            }
         }
-        
     }
-}
-
-#Preview {
-    EditorView()
 }

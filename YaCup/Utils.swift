@@ -14,13 +14,42 @@ enum EditorState {
     case none
 }
 
-
-struct DrawingPath: Identifiable {
-    let id = UUID()
+struct DrawingPath: Identifiable, Codable {
+    var id = UUID()
     var size: CGSize
     var points: [CGPoint]
-    var color: Color
+    var colorHex: String
     var lineWidth: CGFloat
+    
+    init(size: CGSize, points: [CGPoint] = [], colorHex: String, lineWidth: CGFloat) {
+        self.size = size
+        self.points = points
+        self.colorHex = colorHex
+        self.lineWidth = lineWidth
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, size, points, colorHex, lineWidth
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        size = try container.decode(CGSize.self, forKey: .size)
+        points = try container.decode([CGPoint].self, forKey: .points)
+        colorHex = try container.decode(String.self, forKey: .colorHex)
+        lineWidth = try container.decode(CGFloat.self, forKey: .lineWidth)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(size, forKey: .size)
+        try container.encode(points, forKey: .points)
+        try container.encode(colorHex.description, forKey: .colorHex)
+        try container.encode(lineWidth, forKey: .lineWidth)
+    }
+    
     
     func isPointNearPath(_ point: CGPoint, threshold: CGFloat) -> Bool {
         guard points.count > 1 else { return false }
@@ -83,8 +112,8 @@ struct DrawingPath: Identifiable {
         let secondHalf = Array(points[splitIndex + 1..<points.count])
         
         return (
-            DrawingPath(size: size, points: firstHalf, color: color, lineWidth: lineWidth),
-            DrawingPath(size: size, points: secondHalf, color: color, lineWidth: lineWidth)
+            DrawingPath(size: size, points: firstHalf, colorHex: colorHex, lineWidth: lineWidth),
+            DrawingPath(size: size, points: secondHalf, colorHex: colorHex, lineWidth: lineWidth)
         )
     }
 }

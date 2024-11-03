@@ -14,7 +14,6 @@ final class ViewCoordinator: ObservableObject {
     enum Screen {
         case splash
         case library
-        case editor
     }
     
     func showMainScreen() {

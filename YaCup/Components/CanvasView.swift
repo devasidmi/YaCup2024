@@ -26,7 +26,7 @@ struct CanvasView: View {
                     stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
-                        with: .color(path.color),
+                        with: .color(path.colorHex.toColor() ?? Color.blue),
                         style: StrokeStyle(
                             lineWidth: path.lineWidth,
                             lineCap: .round,
@@ -46,7 +46,7 @@ struct CanvasView: View {
                     stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
-                        with: .color(currentPath.color),
+                        with: .color(currentPath.colorHex.toColor() ?? Color.blue),
                         style: StrokeStyle(
                             lineWidth: currentPath.lineWidth,
                             lineCap: .round,
@@ -69,7 +69,7 @@ struct CanvasView: View {
                     stroke.addLines(scaledPoints)
                     layerContext.stroke(
                         stroke,
-                        with: .color(path.color),
+                        with: .color(path.colorHex.toColor() ?? Color.blue),
                         style: StrokeStyle(
                             lineWidth: path.lineWidth,
                             lineCap: .round,
