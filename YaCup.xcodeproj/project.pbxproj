@@ -10,7 +10,7 @@
 		73050F082CD69CE70042A588 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73050F072CD69CE70042A588 /* Localizable.xcstrings */; };
 		73050F0A2CD69CE70042A588 /* YaCup-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */; };
 		730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */; };
-		731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731882B82CD5451300C9E379 /* DrawHistoryManager.swift */; };
+		731882B92CD5451300C9E379 /* EditorHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731882B82CD5451300C9E379 /* EditorHistoryManager.swift */; };
 		736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0EE2CD657110079D445 /* ViewCoordinator.swift */; };
 		736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F12CD6576C0079D445 /* SplashView.swift */; };
 		736DA0F42CD661190079D445 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0F32CD661190079D445 /* LibraryView.swift */; };
@@ -38,7 +38,7 @@
 		73050F072CD69CE70042A588 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "YaCup-InfoPlist.xcstrings"; sourceTree = "<group>"; };
 		730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingPath+Mirror.swift"; sourceTree = "<group>"; };
-		731882B82CD5451300C9E379 /* DrawHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHistoryManager.swift; sourceTree = "<group>"; };
+		731882B82CD5451300C9E379 /* EditorHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorHistoryManager.swift; sourceTree = "<group>"; };
 		736DA0EE2CD657110079D445 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
 		736DA0F12CD6576C0079D445 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		736DA0F32CD661190079D445 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
@@ -117,6 +117,22 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		73B56FD82CD7F15700CDA967 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				73B56FCC2CD7AD5800CDA967 /* ProjectsDataProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		73B56FD92CD7F16400CDA967 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				731882B82CD5451300C9E379 /* EditorHistoryManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		73C30DEA2CCA8F70007AAA28 = {
 			isa = PBXGroup;
 			children = (
@@ -139,9 +155,9 @@
 		73C30DF52CCA8F70007AAA28 /* YaCup */ = {
 			isa = PBXGroup;
 			children = (
-				73B56FCC2CD7AD5800CDA967 /* ProjectsDataProvider.swift */,
+				73B56FD92CD7F16400CDA967 /* Managers */,
+				73B56FD82CD7F15700CDA967 /* Providers */,
 				736DA0F02CD6575C0079D445 /* Views */,
-				731882B82CD5451300C9E379 /* DrawHistoryManager.swift */,
 				730F8D4D2CD4F5F9006274EE /* Extensions */,
 				73846B892CD3D6BA00E22AA1 /* Models */,
 				73B2C3202CD16AB6003F8F88 /* Components */,
@@ -244,7 +260,7 @@
 				736DA0F22CD6576C0079D445 /* SplashView.swift in Sources */,
 				73B56FD02CD7ADB400CDA967 /* YaCup.xcdatamodeld in Sources */,
 				73B2C3282CD188C2003F8F88 /* Utils.swift in Sources */,
-				731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */,
+				731882B92CD5451300C9E379 /* EditorHistoryManager.swift in Sources */,
 				73B56FD62CD7DF9800CDA967 /* ProjectData.swift in Sources */,
 				73B2C3242CD16F83003F8F88 /* EditorView.swift in Sources */,
 				73B56FD22CD7BF9400CDA967 /* Color+Hex.swift in Sources */,

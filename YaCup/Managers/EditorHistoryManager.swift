@@ -13,7 +13,7 @@ enum DrawingAction {
     case split(DrawingPath, [DrawingPath], Bool)
 }
 
-final class DrawHistoryManager: ObservableObject {
+final class EditorHistoryManager: ObservableObject {
     @Published private(set) var canUndo: Bool = false
     @Published private(set) var canRedo: Bool = false
     

@@ -12,6 +12,8 @@ struct LibraryView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @ObservedObject var coordinator: ViewCoordinator
+    @State private var isNewProjectDialogShown = false
+    @State private var newProjectName = ""
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ProjectData.createdAt, ascending: false)],
@@ -19,13 +21,20 @@ struct LibraryView: View {
     private var projects: FetchedResults<ProjectData>
     
     private func addProject() {
+        isNewProjectDialogShown = true
+    }
+    
+    private func createProject() {
         let newProject = ProjectData(context: viewContext)
-        newProject.name = "Untitled"
+        newProject.name = newProjectName.isEmpty ? "Untitled" : newProjectName
+        newProject.createdAt = Date()
         
         let initialCards = [CardData()]
         newProject.cardsData = try! JSONEncoder().encode(initialCards)
         
         try? viewContext.save()
+        
+        newProjectName = ""
     }
     
     var body: some View {
@@ -62,6 +71,15 @@ struct LibraryView: View {
             }
             .sheet(isPresented: $coordinator.isSettingsPresented) {
                 SettingsView().environment(\.colorScheme, colorScheme)
+            }
+            .alert("New Project", isPresented: $isNewProjectDialogShown) {
+                TextField("Project name", text: $newProjectName)
+                Button("Cancel", role: .cancel) { }
+                Button("Create") {
+                    createProject()
+                }
+            } message: {
+                Text("Enter a name for your new project")
             }
             .navigationDestination(for: ProjectData.self) { project in
                 EditorView(project: project)

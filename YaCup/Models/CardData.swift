@@ -60,7 +60,7 @@ struct CardData: Identifiable, Codable {
         try container.encode(Double(scale), forKey: .scale)
     }
     
-    private let historyManager = DrawHistoryManager()
+    private let historyManager = EditorHistoryManager()
     
     var canRedo: Bool {
         historyManager.canRedo
