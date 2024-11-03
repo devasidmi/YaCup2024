@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73050F082CD69CE70042A588 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73050F072CD69CE70042A588 /* Localizable.xcstrings */; };
+		73050F0A2CD69CE70042A588 /* YaCup-InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */; };
 		730F8D512CD4F639006274EE /* DrawingPath+Mirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */; };
 		731882B92CD5451300C9E379 /* DrawHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731882B82CD5451300C9E379 /* DrawHistoryManager.swift */; };
 		736DA0EF2CD657110079D445 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DA0EE2CD657110079D445 /* ViewCoordinator.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		73050F072CD69CE70042A588 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "YaCup-InfoPlist.xcstrings"; sourceTree = "<group>"; };
 		730F8D502CD4F639006274EE /* DrawingPath+Mirror.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrawingPath+Mirror.swift"; sourceTree = "<group>"; };
 		731882B82CD5451300C9E379 /* DrawHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawHistoryManager.swift; sourceTree = "<group>"; };
 		736DA0EE2CD657110079D445 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 		73C30DEA2CCA8F70007AAA28 = {
 			isa = PBXGroup;
 			children = (
+				73050F072CD69CE70042A588 /* Localizable.xcstrings */,
+				73050F092CD69CE70042A588 /* YaCup-InfoPlist.xcstrings */,
 				73C30DF52CCA8F70007AAA28 /* YaCup */,
 				73C30DF42CCA8F70007AAA28 /* Products */,
 			);
@@ -185,6 +191,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 73C30DEA2CCA8F70007AAA28;
 			packageReferences = (
@@ -205,6 +212,8 @@
 			files = (
 				73C30DFE2CCA8F71007AAA28 /* Preview Assets.xcassets in Resources */,
 				73C30DFB2CCA8F71007AAA28 /* Assets.xcassets in Resources */,
+				73050F082CD69CE70042A588 /* Localizable.xcstrings in Resources */,
+				73050F0A2CD69CE70042A588 /* YaCup-InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

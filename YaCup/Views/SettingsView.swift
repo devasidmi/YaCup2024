@@ -73,14 +73,8 @@ struct SettingsView: View {
                 .padding()
                 
                 Spacer()
-                
-                VStack {
-                    Text("Made with ❤️ by vasidmi")
-                        .foregroundColor(.secondary)
-                    Text("v1.0")
-                        .foregroundColor(.secondary)
-                }
-                .padding(.bottom)
+                Text("👨🏻‍💻 Made by @vasidmi")
+                    .foregroundColor(.secondary)
             }
             .navigationTitle("Settings")
             .background(Color(uiColor: .systemGroupedBackground))
