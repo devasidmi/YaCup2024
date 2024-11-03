@@ -164,6 +164,19 @@ struct EditorView: View {
                 ).opacity(editorState == .showAll ? 0 : 1)
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left").foregroundColor(.yellow)
+                            Text("Back").foregroundColor(.yellow)
+                        }
+                        
+                    }
+                }
+            }
+            .toolbar {
                 EditorToolbarView(
                     showAllMode: editorState == .showAll,
                     undoAvailable: cardData[cardIndex].canUndo,
@@ -181,5 +194,6 @@ struct EditorView: View {
                 saveProject()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
