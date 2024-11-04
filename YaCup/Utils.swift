@@ -19,9 +19,9 @@ struct DrawingPath: Identifiable, Codable {
     var size: CGSize
     var points: [CGPoint]
     var colorHex: String
-    var lineWidth: CGFloat
+    var lineWidth: Double
     
-    init(size: CGSize, points: [CGPoint] = [], colorHex: String, lineWidth: CGFloat) {
+    init(size: CGSize, points: [CGPoint] = [], colorHex: String, lineWidth: Double) {
         self.size = size
         self.points = points
         self.colorHex = colorHex
@@ -38,7 +38,7 @@ struct DrawingPath: Identifiable, Codable {
         size = try container.decode(CGSize.self, forKey: .size)
         points = try container.decode([CGPoint].self, forKey: .points)
         colorHex = try container.decode(String.self, forKey: .colorHex)
-        lineWidth = try container.decode(CGFloat.self, forKey: .lineWidth)
+        lineWidth = try container.decode(Double.self, forKey: .lineWidth)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -51,7 +51,7 @@ struct DrawingPath: Identifiable, Codable {
     }
     
     
-    func isPointNearPath(_ point: CGPoint, threshold: CGFloat) -> Bool {
+    func isPointNearPath(_ point: CGPoint, threshold: Double) -> Bool {
         guard points.count > 1 else { return false }
         
         for i in 0..<points.count - 1 {
@@ -94,7 +94,7 @@ struct DrawingPath: Identifiable, Codable {
         guard points.count > 1 else { return nil }
         
         var splitIndex = 0
-        var closestDistance = CGFloat.infinity
+        var closestDistance = Double.infinity
         
         for i in 0..<points.count - 1 {
             let start = points[i]

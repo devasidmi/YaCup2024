@@ -14,13 +14,12 @@ private struct AnimatedCanvas: View, Animatable {
     
     @Binding var cardData: CardData
     @Binding var drawColor: Color
+    @Binding var lineWidth: Double
+    @Binding var eraserLineWidth: Double
     @Binding var editorState: EditorState
     
     @State private var currentPath: DrawingPath?
     @State private var eraserPosition: CGPoint?
-    
-    private let lineWidth: CGFloat = 3
-    private let eraserLineWidth = 48.0
     
     private var isFrontSide: Bool {
         let normalizedRotation = (rotation.truncatingRemainder(dividingBy: 360) + 360).truncatingRemainder(dividingBy: 360)
@@ -136,6 +135,8 @@ struct CanvasCardView: View {
     @Binding var cardData: CardData
     @Binding var editorState: EditorState
     @Binding var drawColor: Color
+    @Binding var lineWidth: Double
+    @Binding var eraserLineWidth: Double
     
     @State private var initialRotation: Double = 0.0
     @State private var isDragging = false
@@ -145,7 +146,7 @@ struct CanvasCardView: View {
     @State private var isFrontSide: Bool = true
     
     
-    private let thresholdPercentage: CGFloat = 0.25
+    private let thresholdPercentage: Double = 0.25
     private let flipAngle: Double = 180.0
     private var flipEnabled: Bool {
         editorState == .none
@@ -157,7 +158,14 @@ struct CanvasCardView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(16)
-            AnimatedCanvas(geometry: geometry, rotation: rotation, cardData: $cardData, drawColor: $drawColor, editorState: $editorState)
+            AnimatedCanvas(geometry: geometry,
+                           rotation: rotation,
+                           cardData: $cardData,
+                           drawColor: $drawColor,
+                           lineWidth: $lineWidth,
+                           eraserLineWidth: $eraserLineWidth,
+                           editorState: $editorState
+            )
         }
         .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
         .gesture(flipEnabled ? flipGesture : nil)

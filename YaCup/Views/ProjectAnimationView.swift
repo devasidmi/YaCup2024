@@ -16,10 +16,10 @@ struct ProjectAnimationView: View {
     
     private let animationDuration: Double = 0.8
     private let pauseBetweenCards: Double = 0.1
-    private let stackOffset: CGFloat = 35
-    private let moveOffset: CGFloat = 100
+    private let stackOffset: Double = 35
+    private let moveOffset: Double = 100
     private let rotationAngle: Double = 2
-    private let minScale: CGFloat = 0.9
+    private let minScale: Double = 0.9
     
     var body: some View {
         VStack {
@@ -47,6 +47,11 @@ struct ProjectAnimationView: View {
         }
     }
     
+    private func triggerHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
     private func getZIndex(for index: Int) -> Double {
         if index == currentIndex {
             return Double(cards.count + 1)
@@ -62,12 +67,12 @@ struct ProjectAnimationView: View {
         return relative < 0 ? relative + cards.count : relative
     }
     
-    private func getHorizontalOffset(for index: Int) -> CGFloat {
+    private func getHorizontalOffset(for index: Int) -> Double {
         let relativeIndex = getRelativeIndex(for: index)
         if index == movingCardIndex {
             return -moveOffset * sin(Double.pi * 0.5) * 15
         }
-        return CGFloat(relativeIndex) * stackOffset
+        return Double(relativeIndex) * stackOffset
     }
     
     private func getRotation(for index: Int) -> Double {
@@ -78,12 +83,13 @@ struct ProjectAnimationView: View {
         return -Double(relativeIndex) * rotationAngle
     }
     
-    private func getScale(for index: Int) -> CGFloat {
+    private func getScale(for index: Int) -> Double {
         let relativeIndex = getRelativeIndex(for: index)
-        return 1.0 - (0.1 * CGFloat(abs(relativeIndex)))
+        return 1.0 - (0.1 * Double(abs(relativeIndex)))
     }
     
     private func togglePlayback() {
+        triggerHapticFeedback()
         isPlaying.toggle()
         
         if isPlaying {

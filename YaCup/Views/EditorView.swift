@@ -14,6 +14,8 @@ struct EditorView: View {
     
     @State private var editorState: EditorState = .none
     @State private var drawColor = Color(.blue)
+    @State private var pencilWidth: Double = 3
+    @State private var eraserWidth: Double = 20
     @State private var cardData: [CardData] = [
         CardData(),
     ]
@@ -148,6 +150,8 @@ struct EditorView: View {
                 } else {
                     EditorCardsView(editorState: $editorState,
                                     drawColor: $drawColor,
+                                    lineWidth: $pencilWidth,
+                                    eraserLineWidth: $eraserWidth,
                                     cardData: $cardData
                     )
                 }
@@ -155,6 +159,8 @@ struct EditorView: View {
                 EditorControlsView(
                     editorState: $editorState,
                     drawColor: $drawColor,
+                    pencilWidth: $pencilWidth,
+                    eraserWidth: $eraserWidth,
                     onEdit: {
                         triggerHapticFeedback()
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {

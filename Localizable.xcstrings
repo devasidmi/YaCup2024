@@ -95,6 +95,16 @@
         }
       }
     },
+    "Apply" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
+          }
+        }
+      }
+    },
     "Are you sure you want to delete all cards?" : {
       "localizations" : {
         "en" : {
