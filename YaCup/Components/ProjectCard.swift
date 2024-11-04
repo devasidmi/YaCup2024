@@ -25,9 +25,14 @@ struct ProjectCard: View {
             Text("\(cards.count) cards")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-            Text(project.createdAt.formatted(date: .abbreviated, time: .shortened))
-                .font(.caption)
-                .foregroundColor(.secondary)
+            Text(project.createdAt, formatter: {
+                let formatter = DateFormatter()
+                formatter.dateStyle = .medium
+                formatter.timeStyle = .short
+                return formatter
+            }())
+            .font(.caption)
+            .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
