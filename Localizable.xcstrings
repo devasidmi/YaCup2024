@@ -137,6 +137,22 @@
         }
       }
     },
+    "Are you sure you want to delete this project? This action cannot be undone." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this project? This action cannot be undone."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы уверены, что хотите удалить проект? Это действие нельзя будет отменить"
+          }
+        }
+      }
+    },
     "Back" : {
       "localizations" : {
         "en" : {
@@ -313,6 +329,22 @@
         }
       }
     },
+    "Delete Project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить проект"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "en" : {
@@ -329,6 +361,38 @@
         }
       }
     },
+    "Edit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать"
+          }
+        }
+      }
+    },
+    "Edit Project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать проект"
+          }
+        }
+      }
+    },
     "Enter a name for your new project" : {
       "localizations" : {
         "en" : {
@@ -341,6 +405,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Введите название для нового проекта"
+          }
+        }
+      }
+    },
+    "Enter a new name for your project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a new name for your project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите название проекта"
           }
         }
       }
@@ -437,6 +517,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Проекты"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Сохранить"
           }
         }
       }

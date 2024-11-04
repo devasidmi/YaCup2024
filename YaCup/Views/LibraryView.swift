@@ -14,7 +14,11 @@ struct LibraryView: View {
     
     @ObservedObject var coordinator: ViewCoordinator
     @State private var isNewProjectDialogShown = false
+    @State private var isEditProjectDialogShown = false
     @State private var newProjectName = ""
+    @State private var projectToEdit: ProjectData?
+    @State private var editedProjectName = ""
+    @State private var projectToDelete: ProjectData?
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ProjectData.createdAt, ascending: false)],
@@ -27,7 +31,7 @@ struct LibraryView: View {
     
     private func createProject() {
         let newProject = ProjectData(context: viewContext)
-        newProject.name = newProjectName.isEmpty ? "Untitled" : newProjectName
+        newProject.name = newProjectName.isEmpty ? "???" : newProjectName
         newProject.createdAt = Date()
         
         let initialCards = [CardData()]
@@ -38,6 +42,23 @@ struct LibraryView: View {
         newProjectName = ""
     }
     
+    private func deleteProject(_ project: ProjectData) {
+        project.prepareForDeletion()
+        viewContext.delete(project)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            try? viewContext.save()
+        }
+    }
+    
+    private func renameProject() {
+        if let project = projectToEdit {
+            project.name = editedProjectName.isEmpty ? "Untitled" : editedProjectName
+            try? viewContext.save()
+        }
+        editedProjectName = ""
+        projectToEdit = nil
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -46,6 +67,21 @@ struct LibraryView: View {
                         ForEach(projects, id: \.objectID) { project in
                             NavigationLink(value: project) {
                                 ProjectCard(project: project)
+                            }
+                            .contextMenu {
+                                Button(action: {
+                                    projectToEdit = project
+                                    editedProjectName = project.name
+                                    isEditProjectDialogShown = true
+                                }) {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                
+                                Button(role: .destructive, action: {
+                                    projectToDelete = project
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
                         }
                     }.padding()
@@ -83,6 +119,34 @@ struct LibraryView: View {
                 }
             } message: {
                 Text("Enter a name for your new project")
+            }
+            .alert("Edit Project", isPresented: $isEditProjectDialogShown) {
+                TextField("Project name", text: $editedProjectName)
+                Button("Cancel", role: .cancel) {
+                    projectToEdit = nil
+                    editedProjectName = ""
+                }
+                Button("Save") {
+                    renameProject()
+                }
+            } message: {
+                Text("Enter a new name for your project")
+            }
+            .alert("Delete Project", isPresented: .init(
+                get: { projectToDelete != nil },
+                set: { if !$0 { projectToDelete = nil } }
+            )) {
+                Button("Cancel", role: .cancel) {
+                    projectToDelete = nil
+                }
+                Button("Delete", role: .destructive) {
+                    if let project = projectToDelete {
+                        deleteProject(project)
+                    }
+                    projectToDelete = nil
+                }
+            } message: {
+                Text("Are you sure you want to delete this project? This action cannot be undone.")
             }
             .navigationDestination(for: ProjectData.self) { project in
                 EditorView(project: project)
