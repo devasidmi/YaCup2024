@@ -87,12 +87,9 @@ struct LibraryView: View {
             .navigationDestination(for: ProjectData.self) { project in
                 EditorView(project: project)
             }
+            .navigationTitle("Projects")
+            .id(locale)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Projects")
-                        .font(.largeTitle)
-                        .bold()
-                }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {
                         coordinator.openSettings()

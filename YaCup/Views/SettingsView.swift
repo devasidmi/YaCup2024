@@ -80,16 +80,10 @@ struct SettingsView: View {
                 Text("👨🏻‍💻 Made by @vasidmi")
                     .foregroundColor(.secondary)
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("Settings")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top, 64)
-                }
-            }
+            .navigationTitle("Settings")
             .background(Color(uiColor: .systemGroupedBackground))
         }
+        .id(locale)
         .preferredColorScheme(appColorScheme)
     }
     
