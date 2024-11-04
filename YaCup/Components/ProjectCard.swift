@@ -11,7 +11,7 @@ import CoreData
 struct ProjectCard: View {
     @ObservedObject var project: ProjectData
     
-    var cards: [CardData] {
+    private var cards: [CardData] {
         let cardsData = project.cardsData ?? Data()
         let decodedCards = try? JSONDecoder().decode([CardData].self, from: cardsData)
         return decodedCards ?? []

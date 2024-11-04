@@ -383,6 +383,22 @@
         }
       }
     },
+    "Play animation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play Animation"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Анимировать"
+          }
+        }
+      }
+    },
     "Project name" : {
       "localizations" : {
         "en" : {

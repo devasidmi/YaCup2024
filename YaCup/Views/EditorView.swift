@@ -18,6 +18,7 @@ struct EditorView: View {
         CardData(),
     ]
     @State private var cardIndex: Int = 0
+    @State private var showProjectAnimationSheet = false
     
     let project: ProjectData
     
@@ -135,6 +136,10 @@ struct EditorView: View {
         cardData[cardIndex].redo()
     }
     
+    private func onShowProjectAnimation() {
+        showProjectAnimationSheet.toggle()
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -163,6 +168,9 @@ struct EditorView: View {
                     }
                 ).opacity(editorState == .showAll ? 0 : 1)
             }
+            .sheet(isPresented: $showProjectAnimationSheet) {
+                ProjectAnimationView(cards: cardData)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -187,7 +195,8 @@ struct EditorView: View {
                     onRemoveAllCards: removeAllCards,
                     onShowAll: onShowAll,
                     onUndo: onUndo,
-                    onRedo: onRedo
+                    onRedo: onRedo,
+                    onShowProjectAnimation: onShowProjectAnimation
                 )
             }
             .onDisappear {

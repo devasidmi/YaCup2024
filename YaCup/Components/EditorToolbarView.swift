@@ -21,6 +21,7 @@ struct EditorToolbarView: View {
     let onShowAll: () -> Void
     let onUndo: () -> Void
     let onRedo: () -> Void
+    let onShowProjectAnimation: () -> Void
     
     var body: some View {
         HStack {
@@ -60,10 +61,21 @@ struct EditorToolbarView: View {
                             Label("Create copy", systemImage: "document.on.document")
                         }
                     }
-                    Button(action: {
-                        onShowAll()
-                    }) {
-                        Label("Show all", systemImage: "square.grid.2x2")
+                    if (totalCards > 1) {
+                        Section {
+                            Button(action: {
+                                onShowProjectAnimation();
+                            }) {
+                                Label("Play animation", systemImage: "movieclapper")
+                            }
+                        }
+                    }
+                    if (totalCards > 1) {
+                        Button(action: {
+                            onShowAll()
+                        }) {
+                            Label("Show all", systemImage: "square.grid.2x2")
+                        }
                     }
                     Section {
                         if (totalCards > 1) {
